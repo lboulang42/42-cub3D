@@ -6,7 +6,7 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 17:31:43 by lboulang          #+#    #+#              #
-#    Updated: 2023/07/10 14:58:25 by lboulang         ###   ########.fr        #
+#    Updated: 2023/10/24 22:58:50 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS =	ft_atoi_itoa.c\
 		./ft_printf/ft_printf.c\
 		./ft_printf/printf_text.c\
 		./ft_printf/printf_nbr.c\
+
 #OBJECTS
 OBJ = $(SRCS:.c=.o)
 #COMPILER
