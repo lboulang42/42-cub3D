@@ -6,13 +6,16 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 19:43:05 by lboulang          #+#    #+#              #
-#    Updated: 2023/10/24 17:19:31 by lboulang         ###   ########.fr        #
+#    Updated: 2023/10/24 22:59:22 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= 	cub3D
 
-SRCS_NAMES 		=	main.c
+SRCS_NAMES 		=	main.c\
+					error.c\
+					map_parsing.c\
+					parsing.c
 
 LIBFT			=	libft.a
 
@@ -23,8 +26,6 @@ MLX_LINUX		= 	libmlx_Linux.a
 DIR_SRCS		=	srcs
 
 DIR_OBJS		=	objs
-
-
 
 OBJS_NAMES		=	${SRCS_NAMES:.c=.o}
 

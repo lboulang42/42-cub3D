@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/24 18:12:36 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:08:44 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,19 @@
 # include <string.h>//perror
 # include <math.h>
 
+#ifndef ERR_READMAP
+# define ERR_READMAP "Error while reading .cub map."
+#endif
+
+#ifndef ERR_EMPTYMAP
+# define ERR_EMPTYMAP "The map is empty."
+#endif
+
 typedef struct s_data
 {
-    int fd_map;
-
+    int     fd_map;
+    char    **map;
+    char    *map_buffer;
 }   t_data;
 
 /*error.c*/
@@ -39,5 +48,8 @@ int main(int ac, char **av, char **env);
 /*parsing.c*/
 int check_extension(char *str);
 void parse_av(int ac, char **av, t_data *data);
+
+
+void read_map(t_data *data);
 
 #endif
