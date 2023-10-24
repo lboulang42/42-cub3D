@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/24 18:13:22 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:37:18 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int ac, char **av, char **env)
 	data = starton();
 	parse_av(ac, av, data);
 	printf("cub3D working\n");
+	read_map(data);
 	clear_data(data);
 	return (0);
 }
