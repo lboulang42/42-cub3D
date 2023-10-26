@@ -6,13 +6,13 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:29:27 by lboulang          #+#    #+#             */
-/*   Updated: 2023/07/10 14:21:36 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/26 01:39:52 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_tab(void **tab)
+void	freetab(void **tab)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:43:51 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/24 22:58:46 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/26 01:39:49 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 char				*ft_strtrim(char const *s1, char const *set);
 
-void				ft_free_tab(void **tab);
+void				freetab(void **tab);
 
 //printf//
 
