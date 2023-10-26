@@ -6,16 +6,20 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 19:43:05 by lboulang          #+#    #+#              #
-#    Updated: 2023/10/24 22:59:22 by lboulang         ###   ########.fr        #
+#    Updated: 2023/10/26 01:34:04 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= 	cub3D
 
-SRCS_NAMES 		=	main.c\
+SRCS_NAMES 		=	assets_parsing.c\
+					cub_parsing.c\
 					error.c\
+					gnl.c\
+					main.c\
 					map_parsing.c\
-					parsing.c
+					parsing.c\
+					utils.c
 
 LIBFT			=	libft.a
 

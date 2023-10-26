@@ -6,11 +6,27 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/24 18:37:18 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/26 01:35:29 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// temp
+void	print_loaded_data(void)
+{
+	t_data	*data;
+
+	data = starton();
+	printf("Loaded Texture North : %s\n", data->north_texture_path);
+	printf("Loaded Texture South : %s\n", data->south_texture_path);
+	printf("Loaded Texture West : %s\n", data->west_texture_path);
+	printf("Loaded Texture East : %s\n", data->east_texture_path);
+	printf("Loaded Color Floor %s\n", data->floor_texture_path);
+	printf("Loaded Color Ceiling %s\n", data->ceiling_texture_path);
+	printf("Loaded Map :\n");
+	ft_print_tab(data->game_map);
+}
 
 t_data	*starton(void)
 {
@@ -31,9 +47,7 @@ int	main(int ac, char **av, char **env)
 	if (!env || !*env)
 		error_exit("No env");
 	data = starton();
-	parse_av(ac, av, data);
-	printf("cub3D working\n");
-	read_map(data);
+	parse(ac, av, data);
 	clear_data(data);
 	return (0);
 }

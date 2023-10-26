@@ -6,18 +6,22 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:23:44 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/24 18:29:50 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/26 01:36:31 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-◦ Mis à part la description de la map, chaque type d’élément peut être séparée par une ou plusieurs lignes vides. => pas de \n dans la map
-◦ La description de la carte sera toujours en dernier dans le fichier, le reste des éléments peut être dans n’importe quel ordre. =>
-◦ Sauf pour la map elle-même, les informations de chaque élément peuvent être séparées par un ou plusieurs espace(s).
+◦ Mis à part la description de la map, chaque type d’élément peut être séparée 
+par une ou plusieurs lignes vides. => pas de \n dans la map
+◦  
+◦ Sauf pour la map elle-même, les informations de chaque élément peuvent être 
+séparées par un ou plusieurs espace(s).
 
-Pour chaque élement, le premier caractère est l’identifiant (un ou deux caractères), suivi de toutes les informations spécifiques à l’élément dans un ordre
+Pour chaque élement, le premier caractère est l’identifiant 
+(un ou deux caractères), suivi de toutes les informations spécifiques à 
+l’élément dans un ordre
 strict tel que :
 — texture nord :
 NO ./path_to_the_north_texture
@@ -56,7 +60,6 @@ F 220,100,0
 C 225,30,0
 
 */
-
 
 /*
 identifiants authorisés : 
