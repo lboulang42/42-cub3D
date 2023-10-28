@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/28 03:07:34 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/10/28 05:46:38 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_data
 	char	*floor_texture_path;
 	char	*ceiling_texture_path;
 
+	/* mlx */
 	int		bits_per_pixel;
 	int		endian;
 	int		size_line;
@@ -66,6 +67,21 @@ typedef struct s_data
 	void	*win_ptr;
 	void	*image;
 	void	*addr;
+
+	/* Settings */
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	movespeed;
+	double	rotspeed;
+	char	player_letter;
+
+	int		*texture[4];
+	int		img_width;
+	int		img_height;
 }			t_data;
 
 /*assets_parsing.C*/
