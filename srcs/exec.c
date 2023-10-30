@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/30 18:09:11 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:24:53 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ void	free_texture(t_data *data)
 		if (data->texture[i])
 		{
 			free(data->texture[i]);
-			data->texture[i] = NULL;
 		}
 	}
 }
@@ -141,7 +140,7 @@ int create_image(t_data *data, int *texture, char *path)
 	if (!data->image)
 	{
 		printf("Error\nInvalid texture path\n");
-		// free_mlx(data);
+		free_mlx(data);
 		clear_data(data);
 		exit(1);
 	}
@@ -165,15 +164,15 @@ int create_image(t_data *data, int *texture, char *path)
 
 void	init_texture(t_data *data)
 {
-	int	i;
+	// int	i;
 
-	i = -1;
-	while (++i < 4)
-	{
-		data->texture[i] = malloc(sizeof(int) * (64 * 64));
-		if (!data->texture[i])
-			return (free_texture(data));
-	}
+	// i = -1;
+	// while (++i < 4)
+	// {
+	// 	data->texture[i] = malloc(sizeof(int) * (64 * 64));
+	// 	if (!data->texture[i])
+	// 		return (free_texture(data));
+	// }
 	create_image(data, data->texture[0], data->north_texture_path);
 	create_image(data, data->texture[1], data->north_texture_path);
 	create_image(data, data->texture[2], data->north_texture_path);
@@ -188,8 +187,13 @@ int	do_exec(t_data *data)
 	init_sight_direction(data);
 	init_all_settings(data);
 	init_texture(data);
-
+	// main_loop(data);
+	// mlx_hook(data->win_ptr, 0, 1L << 0, &key_press, data);
+	// mlx_hook(data->win_ptr, 17, 0, &free, data);
+	// mlx_key_hook(data->win_ptr, &key_press, data);
+	// mlx_loop_hook(data->mlx_ptr, &main_loop, data);
+	// mlx_loop(data->mlx_ptr);
 	// free_mlx(data);
-	free_texture(data);
+	// free_texture(data);
 	return (1);
 }

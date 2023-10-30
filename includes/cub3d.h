@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/30 16:28:56 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:21:04 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_data
 	double	rotspeed;
 	char	player_letter;
 
-	int		*texture[4];
+	int		texture[4][4096];
 	int		img_width;
 	int		img_height;
 }			t_data;
