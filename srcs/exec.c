@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/28 05:47:46 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:09:11 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ void	free_mlx(t_data *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	if (data->mlx_ptr)
 		mlx_destroy_display(data->mlx_ptr);
-	if (data->mlx_ptr)
-		free(data->mlx_ptr);
+	// if (data->addr)
+    //     free(data->addr);
+	// if (data->mlx_ptr)
+	// {
+	// 	mlx_destroy_display(data->mlx_ptr);
+	// 	free(data->mlx_ptr);
+	// }
 }
 
 char	keep_letter(t_data *data)
@@ -125,54 +130,55 @@ void	free_texture(t_data *data)
 }
 
 
-// int create_image(t_data *data, int *texture, char *path)
-// {
-// 	int y;
-// 	int x;
+int create_image(t_data *data, int *texture, char *path)
+{
+	int y;
+	int x;
 
-// 	y = -1;
-// 	data->image = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->img_width,
-// 		&data->img_height);
-// 	if (!data->image)
-// 	{
-// 		printf("Error\nInvalid texture path\n");
-// 		clear_data(data);
-// 		exit(1);
-// 	}
-// 	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,
-// 		&data->size_line, &data->endian);
-// 	if (!data->addr)
-// 	{
-// 		clear_data(data);
-// 		exit(1); 
-// 	}
-// 	while (++y < data->img_height)
-// 	{
-// 		x = -1;
-// 		while (++x < data->img_width)
-// 			texture[data->img_width * y + x] = data->addr[data->img_width * y + x];
-// 	}
-// 	mlx_destroy_image(data->mlx_ptr, data->image);
-// 	return (0);
-// }
+	y = -1;
+	data->image = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->img_width,
+		&data->img_height);
+	if (!data->image)
+	{
+		printf("Error\nInvalid texture path\n");
+		// free_mlx(data);
+		clear_data(data);
+		exit(1);
+	}
+	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,
+		&data->size_line, &data->endian);
+	if (!data->addr)
+	{
+		clear_data(data);
+		exit(1); 
+	}
+	while (++y < data->img_height)
+	{
+		x = -1;
+		while (++x < data->img_width)
+			texture[data->img_width * y + x] = data->addr[data->img_width * y + x];
+	}
+	mlx_destroy_image(data->mlx_ptr, data->image);
+	return (0);
+}
+ 
 
+void	init_texture(t_data *data)
+{
+	int	i;
 
-// void	init_texture(t_data *data)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < 4)
-// 	{
-// 		data->texture[i] = malloc(sizeof(int) * (64 * 64));
-// 		if (!data->texture[i])
-// 			return (free_texture(data));
-// 	}
-// 	create_image(data, data->texture[0], data->north_texture_path);
-// 	create_image(data, data->texture[1], data->north_texture_path);
-// 	create_image(data, data->texture[2], data->north_texture_path);
-// 	create_image(data, data->texture[3], data->north_texture_path);
-// }
+	i = -1;
+	while (++i < 4)
+	{
+		data->texture[i] = malloc(sizeof(int) * (64 * 64));
+		if (!data->texture[i])
+			return (free_texture(data));
+	}
+	create_image(data, data->texture[0], data->north_texture_path);
+	create_image(data, data->texture[1], data->north_texture_path);
+	create_image(data, data->texture[2], data->north_texture_path);
+	create_image(data, data->texture[3], data->north_texture_path);
+}
 
 int	do_exec(t_data *data)
 {
@@ -181,8 +187,9 @@ int	do_exec(t_data *data)
 		return (0);
 	init_sight_direction(data);
 	init_all_settings(data);
-	// init_texture(data);
+	init_texture(data);
 
-	free_mlx(data);
+	// free_mlx(data);
+	free_texture(data);
 	return (1);
 }

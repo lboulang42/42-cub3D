@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/28 05:46:38 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:28:56 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*image;
-	void	*addr;
+	int		*addr;
 
 	/* Settings */
 	double	posx;
