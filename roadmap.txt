@@ -6,7 +6,7 @@
 #    By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 13:38:23 by gcozigon          #+#    #+#              #
-#    Updated: 2023/10/26 13:40:20 by gcozigon         ###   ########.fr        #
+#    Updated: 2023/10/31 15:17:50 by gcozigon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,3 +16,7 @@
 4. init texture + img
 5. key press, key hook
 6. loop/key_hook
+
+
+
+64 egale tex largeur a mettre ds la struct

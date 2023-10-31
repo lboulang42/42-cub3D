@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/30 18:21:04 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:26:53 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,31 @@ typedef struct s_data
 	double	rotspeed;
 	char	player_letter;
 
-	int		texture[4][4096];
+	int		**texture;
 	int		img_width;
 	int		img_height;
+	char	**bufmap;
+
+	int		side;
+	double	perpWalldist;
+	double	raydiry;
+	double	raydirx;
+	double	deltax;
+	double	deltay;
+	int		stepx;
+	int		stepy;
+	int		mapx;
+	int		mapy;
+	double	deltadistx;
+	double	deltadisty;
+	double	sidedistx;
+	double	sidedisty;
+	int		lineHeight;
+	int		drawstart;
+	int		drawend;
+
+	int		ceiling_colors[3];
+	int		floor_colors[3];
 }			t_data;
 
 /*assets_parsing.C*/

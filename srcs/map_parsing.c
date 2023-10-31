@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:18:06 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:59:11 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/10/31 19:45:57 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,22 @@ void	create_game_map(t_data *data, int map_start, int map_end)
 	int	len;
 
 	i = 0;
-	data->game_map = malloc(sizeof(char *) * (map_end - map_start +1));
-	while (data->map[map_start + i])
+	data->game_map = ft_calloc(sizeof(char *), (map_end - map_start) + 1);
+	if (!data->game_map)
+		return ;
+	printf("HAHAHHA %d\n", map_start);
+	while (data->game_map[map_start + i])
 	{
-		len = ft_strlen(data->map[map_start + i]);
+		len = ft_strlen(data->game_map[map_start + i]);
 		data->game_map[i] = malloc(sizeof(char) * (len +1));
 		j = -1;
-		while (data->map[map_start + i][++j])
-			data->game_map[i][j] = data->map[map_start + i][j];
+		while (data->game_map[map_start + i][++j])
+			data->game_map[i][j] = data->game_map[map_start + i][j];
 		data->game_map[i][j] = '\0';
 		i++;
 	}
-	data->game_map[i] = NULL;
+	// data->game_map[i] = NULL;
+	ft_print_tab(data->game_map);
 }
 
 void	read_map(t_data *data)
@@ -116,11 +120,12 @@ void	read_map(t_data *data)
 	data->map_buffer = gnl_str(data->fd_map);
 	if (!data->map_buffer || !*data->map_buffer)
 		error_exit(ERR_EMPTYMAP);
-	data->map = ft_split(data->map_buffer, '\n');
-	if (!data->map || !*data->map)
+	data->game_map = ft_split(data->map_buffer, '\n');
+	if (!data->game_map || !*data->game_map)
 		error_exit("Error Splitting Map Buffer");
-	replace_whitespace(data->map);
-	index_map_start = detect_start_map(data->map);
-	create_game_map(data, index_map_start, tab_len(data->map));
+	replace_whitespace(data->game_map);
+	index_map_start = detect_start_map(data->game_map);
+	create_game_map(data, index_map_start, tab_len(data->game_map));
+	
 	print_loaded_data();
 }
