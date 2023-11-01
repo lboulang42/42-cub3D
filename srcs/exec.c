@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/01 23:49:10 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/02 00:04:14 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void	init_texture(t_data *data)
 			return (free_texture(data));
 	}
 	
-	printf("data->north %s\n", data->north_texture_path);
 	create_image(data, data->texture[0], data->north_texture_path);
 	create_image(data, data->texture[1], data->south_texture_path);
 	create_image(data, data->texture[2], data->east_texture_path);
@@ -556,7 +555,6 @@ int	do_exec(t_data *data)
 		return (free_mlx(data->mlx_ptr), 0);
 	main_loop(data);
 	mlx_hook(data->win_ptr, 2, 1UL << 0, &key_press, data);
-	printf("MOUUUUUSSSSAAAA\n\n");
 	mlx_hook(data->win_ptr, 17, 0, &free_mlx, &data);
 	mlx_loop_hook(data->mlx_ptr, &main_loop, data);
 	mlx_loop(data->mlx_ptr);
