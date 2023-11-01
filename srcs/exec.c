@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/01 22:27:30 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/01 23:49:10 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,8 +431,8 @@ void	move_up(t_data *data)
 	int		y;
 	x = (int)(data->posx + data->dirx * data->movespeed);
 	y = (int)(data->posy + data->diry * data->movespeed);
-	pos_x = data->game_map[x][(int)(data->posy)];
-	pos_y = data->game_map[(int)(data->posx)][y];
+	pos_x = data->game_map[(int)(data->posy)][x];
+	pos_y = data->game_map[y][(int)(data->posx)];
 	if (pos_x == '0')
 		data->posx += data->dirx * data->movespeed;
 	if (pos_y == '0')
@@ -441,8 +441,8 @@ void	move_up(t_data *data)
 
 void	move_down(t_data *data)
 {
-	if (data->game_map[(int)(data->posx - data->dirx
-			* data->movespeed)][(int)(data->posy)] == '0')
+	if (data->game_map[(int)(data->posy)][(int)(data->posx - data->dirx
+			* data->movespeed)] == '0')
 		data->posx -= data->dirx * data->movespeed;
 	if (data->game_map[(int)(data->posx)][(int)(data->posy - data->diry
 			* data->movespeed)] == '0')
@@ -454,31 +454,71 @@ void	move_left(t_data *data)
 	if (data->game_map[(int)(data->posx - data->diry
 			* data->movespeed)][(int)(data->posy)] == '0')
 		data->posx -= data->diry * data->movespeed;
-	if (data->game_map[(int)(data->posx)][(int)(data->posy + data->dirx
-			* data->movespeed)] == '0')
+	if (data->game_map[(int)(data->posy + data->dirx
+			* data->movespeed)][(int)(data->posx)] == '0')
 		data->posy += data->dirx * data->movespeed;
 }
 
 void	move_right(t_data *data)
 {
-	if (data->game_map[(int)(data->posx + data->diry
-			* data->movespeed)][(int)(data->posy)] == '0')
-		data->posx += data->diry * data->movespeed;
-	if (data->game_map[(int)(data->posx)][(int)(data->posy - data->dirx
+	if (data->game_map[(int)(data->posy)][(int)(data->posx + data->diry
 			* data->movespeed)] == '0')
+		data->posx += data->diry * data->movespeed;
+	if (data->game_map[(int)(data->posy - data->dirx
+			* data->movespeed)][(int)(data->posx)] == '0')
 		data->posy -= data->dirx * data->movespeed;
+}
+
+void	rotate_left(t_data *data)
+{
+	double	olddirx;
+	double	oldplanex;
+
+	olddirx = data->dirx;
+	data->dirx = data->dirx * cos(data->rotspeed)
+		- data->diry * sin(data->rotspeed);
+	data->diry = olddirx * sin(data->rotspeed) + data->diry
+		* cos(data->rotspeed);
+	oldplanex = data->planex;
+	data->planex = data->planex * cos(data->rotspeed)
+		- data->planey * sin(data->rotspeed);
+	data->planey = oldplanex * sin(data->rotspeed) + data->planey
+		* cos(data->rotspeed);
+}
+
+void	rotate_right(t_data *data)
+{
+	double	olddirx;
+	double	oldplanex;
+
+	olddirx = data->dirx;
+	data->dirx = data->dirx * cos(-data->rotspeed)
+		- data->diry * sin(-data->rotspeed);
+	data->diry = olddirx * sin(-data->rotspeed) + data->diry
+		* cos(-data->rotspeed);
+	oldplanex = data->planex;
+	data->planex = data->planex * cos(-data->rotspeed)
+		- data->planey * sin(-data->rotspeed);
+	data->planey = oldplanex * sin(-data->rotspeed)
+		+ data->planey * cos(-data->rotspeed);
 }
 
 int key_press(int key, t_data *data)
 {
-	if (key == 13) // Touche 'w'
+	if (key == 119) // Touche 'w'
+	{
 		move_up(data);
-	if (key == 1) // Touche 's'
+	}
+	if (key == 's') // Touche 's'
 		move_down(data);
-	if (key == 0) // Touche 'a'
+	if (key == 'a') // Touche 'a'
 		move_left(data);
-	if (key == 2) // Touche 'd'
+	if (key == 'd') // Touche 'd'
 		move_right(data);
+	if (key == 65363)
+		rotate_right(data);
+	if (key == 65361)
+		rotate_left(data);
 	if (key == 53) // Touche Escape
 	{
 		free_mlx(data);
@@ -515,12 +555,12 @@ int	do_exec(t_data *data)
 	if (!data->addr)
 		return (free_mlx(data->mlx_ptr), 0);
 	main_loop(data);
-	printf("MOUUUUUSSSSAAAA\n\n");
 	mlx_hook(data->win_ptr, 2, 1UL << 0, &key_press, data);
-	mlx_hook(data->win_ptr, 17, 0, &free_mlx, data);
+	printf("MOUUUUUSSSSAAAA\n\n");
+	mlx_hook(data->win_ptr, 17, 0, &free_mlx, &data);
 	mlx_loop_hook(data->mlx_ptr, &main_loop, data);
 	mlx_loop(data->mlx_ptr);
-	// free_mlx(data);
-	// free_texture(data);
+	free_mlx(data);
+	free_texture(data);
 	return (1);
 }
