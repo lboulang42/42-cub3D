@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/31 19:35:12 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/01 22:27:30 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,6 @@ int	set_up_mlx(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (0);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, width, height, "cub3d");
-	if (!data->win_ptr)
-		return (free_mlx(data), 0);
-	data->image = mlx_new_image(data->mlx_ptr, width, height);
-	if (!data->image)
-		return (free_mlx(data), 0);
-	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,
-			&data->size_line, &data->endian);
-	if (!data->addr)
-		return (free_mlx(data->mlx_ptr), 0);
 	return (1);
 }
 
@@ -175,6 +165,8 @@ void	init_texture(t_data *data)
 		if (!data->texture[i])
 			return (free_texture(data));
 	}
+	
+	printf("data->north %s\n", data->north_texture_path);
 	create_image(data, data->texture[0], data->north_texture_path);
 	create_image(data, data->texture[1], data->south_texture_path);
 	create_image(data, data->texture[2], data->east_texture_path);
@@ -205,10 +197,6 @@ void	init_values(t_data *data, int x)
 			/ data->raydiry;
 	data->mapx = data->posx;
 	data->mapy = data->posy;
-	printf("KEKETTE %d\n", data->mapx);
-	printf("PIPI %f\n", data->posx);
-	printf("LOL %d\n", data->stepx);
-	printf("CACA %f\n", data->raydirx);
 	camerax = 2 * x / (double)width - 1;
 	data->raydirx = data->dirx + data->planex * camerax;
 	data->raydiry = data->diry + data->planey * camerax;
@@ -240,47 +228,30 @@ void	define(t_data *data)
 	}
 }
 
-void define_side(t_data *data)
+void	define_side(t_data *data)
 {
-    int hit;
+	int	hit;
 
-    hit = 0;
-    while (hit == 0)
-    {
-        if (data->sidedistx < data->sidedisty)
-        {
-            data->sidedistx += data->deltadistx;
-            data->mapx += data->stepx;
-            if (data->mapx >= 0 && data->mapx < width) // Vérifiez les limites du tableau
-            {
-                data->side = 0;
-                if (data->game_map[data->mapx][data->mapy] > '0')
-                    hit = 1;
-            }
-            else
-            {
-                // Sortez de la boucle si vous atteignez les limites du tableau
-                hit = 1;
-            }
-        }
-        else
-        {
-            data->sidedisty += data->deltadisty;
-            data->mapy += data->stepy;
-            if (data->mapy >= 0 && data->mapy < height) // Vérifiez les limites du tableau
-            {
-                data->side = 1;
-                if (data->game_map[data->mapx][data->mapy] > '0')
-                    hit = 1;
-            }
-            else
-            {
-                // Sortez de la boucle si vous atteignez les limites du tableau
-                hit = 1;
-            }
-        }
-    }
+	hit = 0;
+	while (hit == 0)
+	{
+		if (data->sidedistx < data->sidedisty)
+		{
+			data->sidedistx += data->deltadistx;
+			data->mapx += data->stepx;
+			data->side = 0;
+		}
+		else
+		{
+			data->sidedisty += data->deltadisty;
+			data->mapy += data->stepy;
+			data->side = 1;
+		}
+		if (data->game_map[data->mapy][data->mapx] > '0')
+			hit = 1;
+	}
 }
+
 
 void	define_draw(t_data *data)
 {
@@ -317,10 +288,6 @@ void	define_wallx(t_data *data, double *wallx, int *texture_number, int x)
 		*wallx = data->posy + data->perpWalldist * data->raydiry;
 	else
 		*wallx = data->posx + data->perpWalldist * data->raydirx;
-	printf("WALLX = %f\n\n\n\n\n", *wallx);
-	printf("data->posx = %f\n\n\n\n\n", data->posx);
-	printf("perpWalldist = %f\n\n\n\n\n", data->perpWalldist);
-	printf("RAYDIRX = %f\n\n\n\n\n", data->raydirx);
 }
 
 void	boucle_a(t_data *data, int x, int texNum, int texX)
@@ -338,8 +305,6 @@ void	boucle_a(t_data *data, int x, int texNum, int texX)
 	{
 		texy = (int)texpos & (64 - 1);
 		texpos += step;
-		printf("TEXY = %d\n\n", texy);
-		printf("texx = %d\n\n", texX);
 		
 		color = data->texture[texNum][64 * texy + texX];
 		if (data->side == 1)
@@ -354,12 +319,38 @@ int	set_rgb(int rgb[3])
 	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
 
+int	fill_colors_array(char **str, char **str1, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (str[i])
+			data->floor_colors[i] = ft_atoi(str[i]);
+		else
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (str[i])
+			data->ceiling_colors[i] = ft_atoi(str1[i]);
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	ceiling_or_floor(t_data *data, int x, int q)
 {
 	int	i;
 	int	y;
 
 	i = 0;
+	fill_colors_array(ft_split(data->floor_texture_path, ','), ft_split(data->ceiling_texture_path, ','), data);
 	if (q == 0)
 	{
 		while (i < data->drawstart && i < height)
@@ -391,14 +382,13 @@ void	calc(t_data *data)
 	while (x < width)
 	{
 		define_wallx(data, &wallx, &texture_number, x);
-		//printf("WALLX = %f\n\n\n\n\n", wallx);
 		wallx -= floor(wallx);
 		texx = (int)(wallx * (double)texLargeur);
-		printf("TEXT NUM = %d\n\n\n\n\n", texx);
 		if (data->side == 0 && data->raydirx > 0)
 			texx = texLargeur - texx - 1;
 		if (data->side == 1 && data->raydiry < 0)
 			texx = texLargeur - texx - 1;
+		// printf("texx = %d\n\n\n\n\n", texx);
 		boucle_a(data, x, texture_number, texx);
 		ceiling_or_floor(data, x, 0);
 		ceiling_or_floor(data, x, 1);
@@ -422,6 +412,7 @@ void	draw(t_data *data)
 		}
 		y++;
 	}
+	
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->image, 0, 0);
 }
 
@@ -438,7 +429,6 @@ void	move_up(t_data *data)
 	char	pos_y;
 	int		x;
 	int		y;
-
 	x = (int)(data->posx + data->dirx * data->movespeed);
 	y = (int)(data->posy + data->diry * data->movespeed);
 	pos_x = data->game_map[x][(int)(data->posy)];
@@ -479,25 +469,26 @@ void	move_right(t_data *data)
 		data->posy -= data->dirx * data->movespeed;
 }
 
-int	key_press(int key, t_data *data)
+int key_press(int key, t_data *data)
 {
-	if (key == 'w')
+	if (key == 13) // Touche 'w'
 		move_up(data);
-	if (key == 's')
+	if (key == 1) // Touche 's'
 		move_down(data);
-	if (key == 'a')
+	if (key == 0) // Touche 'a'
 		move_left(data);
-	if (key == 'd')
+	if (key == 2) // Touche 'd'
 		move_right(data);
-	if (key == 65307 || key == 113)
+	if (key == 53) // Touche Escape
 	{
-		// free_palestine(data);
+		free_mlx(data);
 		exit(0);
 	}
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	main_loop(data);
 	return (0);
 }
+
 
 int	do_exec(t_data *data)
 {
@@ -509,14 +500,24 @@ int	do_exec(t_data *data)
 		return (0);
 	init_sight_direction(data);
 	init_all_settings(data);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, width, height, "cub3d");
+	if (!data->win_ptr)
+		return (free_mlx(data), 0);
 	init_texture(data);
-	data->bufmap = malloc(sizeof(int *) * height + 1000);
+	data->bufmap = malloc(sizeof(int *) * height + 1);
 	while (++i < height)
 		data->bufmap[i] = malloc(sizeof(int) * width + 1);
+	data->image = mlx_new_image(data->mlx_ptr, width, height);
+	if (!data->image)
+		return (free_mlx(data), 0);
+	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,
+			&data->size_line, &data->endian);
+	if (!data->addr)
+		return (free_mlx(data->mlx_ptr), 0);
 	main_loop(data);
-	mlx_hook(data->win_ptr, 0, 1L << 0, &key_press, data);
+	printf("MOUUUUUSSSSAAAA\n\n");
+	mlx_hook(data->win_ptr, 2, 1UL << 0, &key_press, data);
 	mlx_hook(data->win_ptr, 17, 0, &free_mlx, data);
-	mlx_key_hook(data->win_ptr, &key_press, data);
 	mlx_loop_hook(data->mlx_ptr, &main_loop, data);
 	mlx_loop(data->mlx_ptr);
 	// free_mlx(data);

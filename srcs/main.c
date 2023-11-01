@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/31 19:40:08 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:56:11 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **env)
 	data = starton();
 	parse(ac, av, data);
 	print_loaded_data();
-	// do_exec(data);
+	do_exec(data);
 	// clear_data(data);
 	return (0);
 }

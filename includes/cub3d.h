@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/31 17:26:53 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:45:42 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void		check_extension(char *str);
 void		parse_av1(int ac, char **av, t_data *data);
 void		parse(int ac, char **av, t_data *data);
 void		read_map(t_data *data);
-
 /*utils.c*/
 int			starts_with(char *str, char *sub);
 int			is_white_space(char c);

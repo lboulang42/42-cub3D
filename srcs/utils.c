@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:59:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:59:23 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:33:01 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_print_tab(char **tab)
 
 	i = -1;
 	while (tab[++i])
-		printf("%s\n", tab[i]);
+		printf("%s             lines[%d]\n", tab[i], i);
 }
 
 /*skip whitespaces in str, if str starts with sub return 1, else return 0*/
