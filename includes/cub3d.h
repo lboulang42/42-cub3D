@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/01 20:45:42 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:05:13 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,54 @@ void		test_asset(char *asset_line, char **ptr, int op);
 
 /*exec.c*/
 int			do_exec(t_data *data);
+int			main_loop(t_data *data);
+
+/*exec_init.c*/
+
+void		basic_settings(t_data *data);
 int			set_up_mlx(t_data *data);
+void		init_sight_direction(t_data *data);
+void		init_all_settings(t_data *data);
+void		init_texture(t_data *data);
+
+/*exec_utils.c*/
+
+int			create_image(t_data *data, int *texture, char *path);
+int			choose_texture(t_data *data, int texture_number);
+char		keep_letter(t_data *data);
+void		initializebuff(t_data *data);
+
+/*exec_utils2.c*/
+
+int			set_rgb(int rgb[3]);
+
+/*exec_movement.c.c*/
+
+void		move_up(t_data *data);
+void		move_down(t_data *data);
+void		move_left(t_data *data);
+void		move_right(t_data *data);
+void		rotate_left(t_data *data);
+void		rotate_right(t_data *data);
+
+/*exec_define_wallx.c.c*/
+
+void		init_values(t_data *data, int x);
+void		define(t_data *data);
+void		define_side(t_data *data);
+void		define_draw(t_data *data);
+void		define_wallx(t_data *data, double *wallx, int *texture_number,
+				int x);
+
+/*exec_do_calc.c.c*/
+
+int			fill_colors_array(char **str, char **str1, t_data *data);
+void		ceiling_or_floor(t_data *data, int x, int q);
+void		boucle_a(t_data *data, int x, int texNum, int texX);
+
+/*exec_free.c.c*/
+
+int			free_mlx(t_data *data);
+void		free_texture(t_data *data);
 
 #endif

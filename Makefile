@@ -6,7 +6,7 @@
 #    By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 19:43:05 by lboulang          #+#    #+#              #
-#    Updated: 2023/11/01 22:20:48 by gcozigon         ###   ########.fr        #
+#    Updated: 2023/11/02 13:08:06 by gcozigon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,15 @@ SRCS_NAMES 		=	assets_parsing.c\
 					map_parsing.c\
 					parsing.c\
 					utils.c \
-					exec.c
+					exec_main.c \
+					exec_init.c \
+					exec_utils.c \
+					exec_utils2.c \
+					exec_movement.c \
+					exec_define_wallx.c \
+					exec_free.c \
+					exec_do_calc.c \
+					
 
 LIBFT			=	libft.a
 
