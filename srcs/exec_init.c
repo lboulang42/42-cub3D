@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/04 13:36:31 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:59:37 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	init_texture(t_data *data)
 		if (!data->texture[i])
 			return (free_texture(data));
 	}
-
 	create_image(data, data->texture[0], data->north_texture_path);
 	create_image(data, data->texture[1], data->south_texture_path);
 	create_image(data, data->texture[2], data->east_texture_path);

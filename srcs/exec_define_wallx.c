@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:32:53 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/02 12:37:24 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:05:14 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	define_side(t_data *data)
 			data->mapy += data->stepy;
 			data->side = 1;
 		}
-		if (data->game_map[data->mapy][data->mapx] > '0')
+		if (data->game_map[data->mapy][data->mapx] == '1')
 			hit = 1;
 	}
 }

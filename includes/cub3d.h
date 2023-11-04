@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/04 13:34:59 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:14:23 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_data
 	int		**texture;
 	int		img_width;
 	int		img_height;
-	char	**bufmap;
+	int		**bufmap;
 
 	int		side;
 	double	perpWalldist;

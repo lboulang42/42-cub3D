@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:18:06 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/01 20:32:57 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:09:31 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,4 @@ void	read_map(t_data *data)
 	replace_whitespace(data->map);
 	index_map_start = detect_start_map(data->map);
 	create_game_map(data, index_map_start, tab_len(data->map));
-	
 }

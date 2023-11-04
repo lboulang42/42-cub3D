@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/04 13:30:14 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:15:02 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ int	do_exec(t_data *data)
 	init_sight_direction(data);
 	init_all_settings(data);
 	init_texture(data);
-	data->bufmap = malloc(sizeof(int *) * height + 1);
+	data->bufmap = malloc(sizeof(int *) * height  + 1000);
 	while (++i < height)
-		data->bufmap[i] = malloc(sizeof(int) * width + 1);
+		data->bufmap[i] = malloc(sizeof(int) * width * 8 + 1000);
 	data->image = mlx_new_image(data->mlx_ptr, width, height);
 	if (!data->image)
 		return (free_mlx(data), 0);
