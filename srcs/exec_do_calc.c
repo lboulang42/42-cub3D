@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:48:49 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/02 12:58:14 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:36:12 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	fill_colors_array(char **str, char **str1, t_data *data)
 			return (0);
 		i++;
 	}
+	free_tab(str);
+	free_tab(str1);
 	return (1);
 }
 
@@ -43,7 +45,6 @@ void	ceiling_or_floor(t_data *data, int x, int q)
 	int	y;
 
 	i = 0;
-	fill_colors_array(ft_split(data->floor_texture_path, ','), ft_split(data->ceiling_texture_path, ','), data);
 	if (q == 0)
 	{
 		while (i < data->drawstart && i < height)
@@ -63,11 +64,11 @@ void	ceiling_or_floor(t_data *data, int x, int q)
 
 void	boucle_a(t_data *data, int x, int texNum, int texX)
 {
-	double	step;
-	double	texpos;
-	int		texy;
-	int		color;
-	int		y;
+	double step;
+	double texpos;
+	int texy;
+	int color;
+	int y;
 
 	y = data->drawstart;
 	step = 1.0 * 64 / data->lineHeight;
@@ -76,7 +77,7 @@ void	boucle_a(t_data *data, int x, int texNum, int texX)
 	{
 		texy = (int)texpos & (64 - 1);
 		texpos += step;
-		
+
 		color = data->texture[texNum][64 * texy + texX];
 		if (data->side == 1)
 			color = (color >> 1) & 8355711;

@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/02 12:24:28 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:36:31 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ void	init_all_settings(t_data *data)
 	data->planey = 0.66 * (data->dirx * -1);
 	data->movespeed = 0.5;
 	data->rotspeed = 0.09;
+	fill_colors_array(ft_split(data->floor_texture_path, ','),
+						ft_split(data->ceiling_texture_path, ','),
+						data);
 }
 
 void	init_texture(t_data *data)
 {
-	int	i;
+	int i;
 	i = -1;
 	data->texture = (int **)malloc(sizeof(int *) * 4 + 1000);
 	while (++i < 4)
@@ -77,7 +80,7 @@ void	init_texture(t_data *data)
 		if (!data->texture[i])
 			return (free_texture(data));
 	}
-	
+
 	create_image(data, data->texture[0], data->north_texture_path);
 	create_image(data, data->texture[1], data->south_texture_path);
 	create_image(data, data->texture[2], data->east_texture_path);

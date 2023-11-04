@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/02 13:05:13 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:34:59 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,6 @@ void		boucle_a(t_data *data, int x, int texNum, int texX);
 
 int			free_mlx(t_data *data);
 void		free_texture(t_data *data);
+void		free_tab(char **tab);
 
 #endif

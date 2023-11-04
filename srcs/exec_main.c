@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/02 13:04:35 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:30:14 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int key_press(int key, t_data *data)
 	if (key == 65307) 
 	{
 		free_mlx(data);
+		clear_data(data);
 		exit(0);
 	}
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
