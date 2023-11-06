@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/10/26 01:52:58 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:48:39 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 {
     char    **map;
     char    **game_map;
+    char    **pathfindmap;
     int     fd_map;
     char    *map_buffer;
 

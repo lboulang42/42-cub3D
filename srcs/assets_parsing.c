@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 01:05:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:53:37 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:14:35 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	test_asset_path(char **path, char **stock_ptr)
 	if (fd == -1)
 		return (freetab((void **)path), error_exit("Can't open texture path"));
 	close(fd);
+	if (*stock_ptr)
+	{
+		freetab((void **)path);
+		error_exit("you cant load 2 texture for the same assset ;)");
+	}
 	*stock_ptr = ft_strdup(path[1]);
 }
 
