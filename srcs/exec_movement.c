@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:28:20 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 20:44:40 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:56:01 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,4 @@ void	move_right(t_data *data)
 	if (data->game_map[(int)(data->posy)][(int)(data->posx + data->diry
 			* data->movespeed)] == '0')
 		data->posx += data->diry * data->movespeed;
-}
-
-void	rotate_left(t_data *data)
-{
-	double	olddirx;
-	double	oldplanex;
-
-	olddirx = data->dirx;
-	data->dirx = data->dirx * cos(data->rotspeed) - data->diry
-		* sin(data->rotspeed);
-	data->diry = olddirx * sin(data->rotspeed) + data->diry
-		* cos(data->rotspeed);
-	oldplanex = data->planex;
-	data->planex = data->planex * cos(data->rotspeed) - data->planey
-		* sin(data->rotspeed);
-	data->planey = oldplanex * sin(data->rotspeed) + data->planey
-		* cos(data->rotspeed);
-}
-
-void	rotate_right(t_data *data)
-{
-	double	olddirx;
-	double	oldplanex;
-
-	olddirx = data->dirx;
-	data->dirx = data->dirx * cos(-data->rotspeed) - data->diry
-		* sin(-data->rotspeed);
-	data->diry = olddirx * sin(-data->rotspeed) + data->diry
-		* cos(-data->rotspeed);
-	oldplanex = data->planex;
-	data->planex = data->planex * cos(-data->rotspeed) - data->planey
-		* sin(-data->rotspeed);
-	data->planey = oldplanex * sin(-data->rotspeed) + data->planey
-		* cos(-data->rotspeed);
 }

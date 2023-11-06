@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 20:42:00 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:50:56 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ char		*ft_join_free(char *str1, char *str2);
 /* key.c */
 int			key_release(int key, t_data *data);
 int			key_press(int key, t_data *data);
+int			move(t_data *data);
 
 /*main.c*/
 t_data		*starton(void);
@@ -217,5 +218,10 @@ void		free_texture(t_data *data);
 void		free_tab(char **tab);
 int			free_all_cub(t_data *data);
 void		free_exit(t_data *data);
+
+/*exec_main.c.c*/
+void		calc(t_data *data);
+void		draw(t_data *data);
+void		run_mlx(t_data *data);
 
 #endif

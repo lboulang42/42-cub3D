@@ -6,13 +6,12 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/06 20:18:06 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:53:51 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// temp
 void	print_loaded_data(void)
 {
 	t_data	*data;

@@ -6,7 +6,7 @@
 #    By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 19:43:05 by lboulang          #+#    #+#              #
-#    Updated: 2023/11/06 17:14:21 by gcozigon         ###   ########.fr        #
+#    Updated: 2023/11/06 20:54:26 by gcozigon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS_NAMES 		=	assets_parsing.c\
 					exec_define_wallx.c \
 					exec_free.c \
 					exec_do_calc.c \
-					key.c \
+					exec_key.c \
 					
 
 LIBFT			=	libft.a
