@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:25:27 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/04 20:04:24 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:29:51 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ char	keep_letter(t_data *data)
 			if (data->game_map[y][x] == 'N' || data->game_map[y][x] == 'S'
 				|| data->game_map[y][x] == 'E' || data->game_map[y][x] == 'W')
 			{
-				data->posx = (double)x;
-				data->posy = (double)y;
+				data->posx = (double)x + 0.5;
+				data->posy = (double)y + 0.5;
 				return (data->game_map[y][x]);
 			}
 			x++;

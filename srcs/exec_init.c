@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/04 17:59:37 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:19:17 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	init_all_settings(t_data *data)
 {
 	data->planex = 0.66 * data->diry;
 	data->planey = 0.66 * (data->dirx * -1);
-	data->movespeed = 0.5;
-	data->rotspeed = 0.09;
+	data->movespeed = 0.04;
+	data->rotspeed = 0.05;
 	fill_colors_array(ft_split(data->floor_texture_path, ','),
 						ft_split(data->ceiling_texture_path, ','),
 						data);
