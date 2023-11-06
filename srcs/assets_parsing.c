@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 01:05:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:53:37 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:57:14 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	is_asset_to_load(char *str)
 	t_data	*data;
 
 	data = starton();
-	if (starts_with(str, "NO "))
-		return (test_asset(str, &data->north_texture_path, 1), 1);
-	if (starts_with(str, "SO "))
-		return (test_asset(str, &data->south_texture_path, 1), 1);
 	if (starts_with(str, "WE "))
-		return (test_asset(str, &data->west_texture_path, 1), 1);
+		return (test_asset(str, &data->north_texture_path, 1), 1);
 	if (starts_with(str, "EA "))
+		return (test_asset(str, &data->south_texture_path, 1), 1);
+	if (starts_with(str, "NO "))
+		return (test_asset(str, &data->west_texture_path, 1), 1);
+	if (starts_with(str, "SO "))
 		return (test_asset(str, &data->east_texture_path, 1), 1);
 	if (starts_with(str, "F "))
 		return (test_asset(str, &data->floor_texture_path, 0), 1);

@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 17:19:17 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:51:02 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ void	init_sight_direction(t_data *data)
 {
 	if (data->player_letter == 'N')
 	{
-		data->dirx = -1;
-		data->diry = 0;
-	}
-	else if (data->player_letter == 'S')
-	{
-		data->dirx = 1;
-		data->diry = 0;
-	}
-	else if (data->player_letter == 'W')
-	{
 		data->dirx = 0;
 		data->diry = -1;
 	}
-	else if (data->player_letter == 'E')
+	else if (data->player_letter == 'S')
 	{
 		data->dirx = 0;
 		data->diry = 1;
+	}
+	else if (data->player_letter == 'W')
+	{
+		data->dirx = -1;
+		data->diry = 0;
+	}
+	else if (data->player_letter == 'E')
+	{
+		data->dirx = 1;
+		data->diry = 0;
 	}
 }
 

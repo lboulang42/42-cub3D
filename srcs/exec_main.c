@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 18:27:56 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:49:46 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,41 @@ int change_map(t_data *data)
 	return (0);
 }
 
+void	ft_reverse(char s[])
+{
+	int		i;
+	int		j;
+	char	c;
+
+	i = 0;
+	j = ft_strlen(s) - 1;
+	while (i < j)
+	{
+		c = s[i];
+		s[i] = s[j];
+		s[j] = c;
+		i++;
+		j--;
+	}
+}
+
+int revserse_map(t_data *data)
+{
+	int i;
+	i = 0;
+	while (data->game_map[++i])
+	{
+		ft_reverse(data->game_map[i]);
+	}
+	return(0);
+}
+
 int	do_exec(t_data *data)
 {
 	int i;
 	
 	i = -1;
+	revserse_map(data);
 	basic_settings(data);
 	if (!set_up_mlx(data))
 		return (0);
