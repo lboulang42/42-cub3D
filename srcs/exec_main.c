@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 18:49:46 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:27:27 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,11 @@ int	move(t_data *data)
 	if (data->keys.left == 1)
 		rotate_left(data);
 	if (data->keys.q == 1)
+	{
+		free_mlx(data);
+		clear_data(data);
 		exit(0);
+	}
 	calc(data);
 	draw(data);
 	return (0);
@@ -173,9 +177,9 @@ int	do_exec(t_data *data)
 	init_sight_direction(data);
 	init_all_settings(data);
 	init_texture(data);
-	data->bufmap = malloc(sizeof(int *) * height  + 1000);
+	data->bufmap = ft_calloc(sizeof(int *), height  + 1000);
 	while (++i < height)
-		data->bufmap[i] = malloc(sizeof(int) * width * 8 + 1000);
+		data->bufmap[i] = ft_calloc(sizeof(int), width * 8 + 1000);
 	data->image = mlx_new_image(data->mlx_ptr, width, height);
 	if (!data->image)
 		return (free_mlx(data), 0);
@@ -187,9 +191,9 @@ int	do_exec(t_data *data)
 	mlx_loop_hook(data->mlx_ptr, &move, data);
     mlx_hook(data->win_ptr, 2, 1L << 0, &key_press, data);
     mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);
-	mlx_hook(data->win_ptr, 17, 0, &free_mlx, &data);
+	mlx_hook(data->win_ptr, 17, 0, &free_all_cub, data);
 	mlx_loop(data->mlx_ptr);
 	free_mlx(data);
-	free_texture(data);
+	clear_data(data);
 	return (1);
 }

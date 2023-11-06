@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 17:11:47 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:15:57 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@
 
 typedef struct s_key
 {
-	int s;
-	int w;
-	int d;
-	int a;
-	int left;
-	int right;
-	int q;
-} t_key;
+	int		s;
+	int		w;
+	int		d;
+	int		a;
+	int		left;
+	int		right;
+	int		q;
+}			t_key;
 
 typedef struct s_data
 {
@@ -115,10 +115,10 @@ typedef struct s_data
 
 	int		ceiling_colors[3];
 	int		floor_colors[3];
-	
+
 	// key
 
-	t_key keys;
+	t_key	keys;
 }			t_data;
 
 /*assets_parsing.C*/
@@ -135,8 +135,8 @@ char		*gnl_str(int fd);
 char		*ft_join_free(char *str1, char *str2);
 
 /* key.c */
-int key_release(int key, t_data *data);
-int key_press(int key, t_data *data);
+int			key_release(int key, t_data *data);
+int			key_press(int key, t_data *data);
 
 /*main.c*/
 t_data		*starton(void);
@@ -213,5 +213,6 @@ void		boucle_a(t_data *data, int x, int texNum, int texX);
 int			free_mlx(t_data *data);
 void		free_texture(t_data *data);
 void		free_tab(char **tab);
+int			free_all_cub(t_data *data);
 
 #endif
