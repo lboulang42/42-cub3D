@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 18:51:02 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:44:16 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	basic_settings(t_data *data)
 {
-	// mettre dir NORD
 	data->dirx = -1;
 	data->diry = 0;
-	// a voir plus tard
 	data->planex = 0;
 	data->planey = 0.66;
 	data->player_letter = keep_letter(data);
@@ -65,13 +63,14 @@ void	init_all_settings(t_data *data)
 	data->movespeed = 0.04;
 	data->rotspeed = 0.05;
 	fill_colors_array(ft_split(data->floor_texture_path, ','),
-						ft_split(data->ceiling_texture_path, ','),
-						data);
+		ft_split(data->ceiling_texture_path, ','),
+		data);
 }
 
 void	init_texture(t_data *data)
 {
-	int i;
+	int	i;
+
 	i = -1;
 	data->texture = (int **)malloc(sizeof(int *) * 4 + 1000);
 	while (++i < 4)

@@ -6,38 +6,11 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 19:27:27 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:42:59 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// int key_press(int key, t_data *data)
-// {
-// 	if (key == 119) 
-// 	{
-// 		move_up(data);
-// 	}
-// 	if (key == 's') 
-// 		move_down(data);
-// 	if (key == 'a') 
-// 		move_left(data);
-// 	if (key == 'd') 
-// 		move_right(data);
-// 	if (key == 65363)
-// 		rotate_right(data);
-// 	if (key == 65361)
-// 		rotate_left(data);
-// 	if (key == 65307) 
-// 	{
-// 		free_mlx(data);
-// 		clear_data(data);
-// 		exit(0);
-// 	}
-// 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-// 	main_loop(data);
-// 	return (0);
-// }
 
 void	calc(t_data *data)
 {
@@ -45,20 +18,20 @@ void	calc(t_data *data)
 	int		x;
 	int		texture_number;
 	int		texx;
-	int		texLargeur;
+	int		tex_largeur;
 
-	texLargeur = 64;
+	tex_largeur = 64;
 	x = 0;
 	initializebuff(data);
 	while (x < width)
 	{
 		define_wallx(data, &wallx, &texture_number, x);
 		wallx -= floor(wallx);
-		texx = (int)(wallx * (double)texLargeur);
+		texx = (int)(wallx * (double)tex_largeur);
 		if (data->side == 0 && data->raydirx > 0)
-			texx = texLargeur - texx - 1;
+			texx = tex_largeur - texx - 1;
 		if (data->side == 1 && data->raydiry < 0)
-			texx = texLargeur - texx - 1;
+			texx = tex_largeur - texx - 1;
 		boucle_a(data, x, texture_number, texx);
 		ceiling_or_floor(data, x, 0);
 		ceiling_or_floor(data, x, 1);
@@ -82,7 +55,6 @@ void	draw(t_data *data)
 		}
 		y++;
 	}
-	
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->image, 0, 0);
 }
 
@@ -111,64 +83,19 @@ int	move(t_data *data)
 	return (0);
 }
 
-int change_map(t_data *data)
+void	run_mlx(t_data *data)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (data->game_map[y])
-	{
-		x = 0;
-		while (data->game_map[y][x])
-		{
-			if (data->game_map[y][x] == 'N' || data->game_map[y][x] == 'S'
-				|| data->game_map[y][x] == 'E' || data->game_map[y][x] == 'W')
-			{
-				data->game_map[y][x] = '0';
-				return (1);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
-void	ft_reverse(char s[])
-{
-	int		i;
-	int		j;
-	char	c;
-
-	i = 0;
-	j = ft_strlen(s) - 1;
-	while (i < j)
-	{
-		c = s[i];
-		s[i] = s[j];
-		s[j] = c;
-		i++;
-		j--;
-	}
-}
-
-int revserse_map(t_data *data)
-{
-	int i;
-	i = 0;
-	while (data->game_map[++i])
-	{
-		ft_reverse(data->game_map[i]);
-	}
-	return(0);
+	mlx_loop_hook(data->mlx_ptr, &move, data);
+	mlx_hook(data->win_ptr, 2, 1L << 0, &key_press, data);
+	mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);
+	mlx_hook(data->win_ptr, 17, 0, &free_all_cub, data);
+	mlx_loop(data->mlx_ptr);
 }
 
 int	do_exec(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	revserse_map(data);
 	basic_settings(data);
@@ -177,9 +104,9 @@ int	do_exec(t_data *data)
 	init_sight_direction(data);
 	init_all_settings(data);
 	init_texture(data);
-	data->bufmap = ft_calloc(sizeof(int *), height  + 1000);
+	data->bufmap = ft_calloc(sizeof(int *), height);
 	while (++i < height)
-		data->bufmap[i] = ft_calloc(sizeof(int), width * 8 + 1000);
+		data->bufmap[i] = ft_calloc(sizeof(int), width * 4);
 	data->image = mlx_new_image(data->mlx_ptr, width, height);
 	if (!data->image)
 		return (free_mlx(data), 0);
@@ -188,11 +115,7 @@ int	do_exec(t_data *data)
 	if (!data->addr)
 		return (free_mlx(data->mlx_ptr), 0);
 	change_map(data);
-	mlx_loop_hook(data->mlx_ptr, &move, data);
-    mlx_hook(data->win_ptr, 2, 1L << 0, &key_press, data);
-    mlx_hook(data->win_ptr, 3, 1L << 1, &key_release, data);
-	mlx_hook(data->win_ptr, 17, 0, &free_all_cub, data);
-	mlx_loop(data->mlx_ptr);
+	run_mlx(data);
 	free_mlx(data);
 	clear_data(data);
 	return (1);

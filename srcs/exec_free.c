@@ -6,16 +6,23 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:42:53 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 19:25:27 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:38:13 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int free_all_cub(t_data *data)
+int	free_all_cub(t_data *data)
 {
 	mlx_loop_end(data->mlx_ptr);
 	return (0);
+}
+
+void	free_exit(t_data *data)
+{
+	free_mlx(data);
+	clear_data(data);
+	exit(0);
 }
 
 int	free_mlx(t_data *data)

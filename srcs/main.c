@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/04 18:12:05 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:18:06 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ t_data	*starton(void)
 	return (&data);
 }
 
-void	init_data(t_data *data)
-{
-	data->fd_map = -1;
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
@@ -50,6 +45,5 @@ int	main(int ac, char **av, char **env)
 	parse(ac, av, data);
 	print_loaded_data();
 	do_exec(data);
-	// clear_data(data);
 	return (0);
 }

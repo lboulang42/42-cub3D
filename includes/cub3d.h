@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 19:15:57 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:42:00 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ int			key_press(int key, t_data *data);
 
 /*main.c*/
 t_data		*starton(void);
-void		init_data(t_data *data);
 int			main(int ac, char **av, char **env);
 void		print_loaded_data(void);
 /*parsing.c*/
@@ -183,6 +182,9 @@ void		initializebuff(t_data *data);
 /*exec_utils2.c*/
 
 int			set_rgb(int rgb[3]);
+void		ft_reverse(char *s);
+int			revserse_map(t_data *data);
+int			change_map(t_data *data);
 
 /*exec_movement.c.c*/
 
@@ -214,5 +216,6 @@ int			free_mlx(t_data *data);
 void		free_texture(t_data *data);
 void		free_tab(char **tab);
 int			free_all_cub(t_data *data);
+void		free_exit(t_data *data);
 
 #endif

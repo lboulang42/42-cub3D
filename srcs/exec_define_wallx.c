@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:32:53 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 18:32:34 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:21:32 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	define_side(t_data *data)
 			hit = 1;
 	}
 }
-
 
 void	define_draw(t_data *data)
 {

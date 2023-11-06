@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:25:27 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/06 17:29:51 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:38:02 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,11 @@ int	create_image(t_data *data, int *texture, char *path)
 	data->image = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->img_width,
 			&data->img_height);
 	if (!data->image)
-	{
-		printf("Error\nInvalid texture path\n");
-		free_mlx(data);
-		clear_data(data);
-		exit(1);
-	}
+		free_exit(data);
 	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,
 			&data->size_line, &data->endian);
 	if (!data->addr)
-	{
-		clear_data(data);
-		exit(1);
-	}
+		free_exit(data);
 	while (++y < data->img_height)
 	{
 		x = -1;
@@ -41,8 +33,7 @@ int	create_image(t_data *data, int *texture, char *path)
 			texture[data->img_width * y + x] = data->addr[data->img_width * y
 				+ x];
 	}
-	mlx_destroy_image(data->mlx_ptr, data->image);
-	return (0);
+	return (mlx_destroy_image(data->mlx_ptr, data->image), 0);
 }
 
 int	choose_texture(t_data *data, int texture_number)
