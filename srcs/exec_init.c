@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 22:09:52 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 22:47:13 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_sight_direction(t_data *data)
 	else if (data->player_letter == 'S')
 	{
 		data->dirx = 0;
-		data->diry = 1;
+		data->diry = 1; 
 	}
 	else if (data->player_letter == 'W')
 	{
@@ -60,12 +60,12 @@ void	init_all_settings(t_data *data)
 {
 	data->planex = 0.66 * data->diry;
 	data->planey = 0.66 * (data->dirx * -1);
-	data->movespeed = 0.05;
-	data->rotspeed = 0.03;
+	data->movespeed = 0.01;
+	data->rotspeed = 0.01;
 	printf("%s\n%s\n", data->floor_texture_path, data->ceiling_texture_path);
 	fill_colors_array(ft_split(data->floor_texture_path, ','),
-		ft_split(data->ceiling_texture_path, ','),
-		data);
+						ft_split(data->ceiling_texture_path, ','),
+						data);
 }
 
 void	init_texture(t_data *data)
@@ -73,7 +73,7 @@ void	init_texture(t_data *data)
 	int	i;
 
 	i = -1;
-	data->texture = (int **)malloc(sizeof(int *) * 4 + 1000);
+	data->texture = (int **)malloc(sizeof(int *) * 4);
 	while (++i < 4)
 	{
 		data->texture[i] = malloc(sizeof(int) * (64 * 64));
