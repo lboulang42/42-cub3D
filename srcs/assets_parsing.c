@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 01:05:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/06 16:14:35 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:05:22 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,17 @@ void	test_asset_color(char **path, char **stock_ptr)
 	colors = ft_split(path[1], ',');
 	if (!colors)
 		return (freetab((void **)path), error_exit("Split error"));
+	if (tab_len(colors) != 3 )
+		return (freetab((void **)colors), freetab((void **)path), error_exit("need 3 RGB colors"));
 	while (++i < 3)
 	{
+		int j = -1;
+		while (colors[i][++j])
+			if (!ft_isdigit(colors[i][j]))
+			{
+				freetab((void **)colors);
+				return (freetab((void **)path), error_exit(ERR_TCOLOR));		
+			}
 		if (ft_atoi(colors[i]) < 0 || ft_atoi(colors[i]) > 255)
 		{
 			freetab((void **)colors);

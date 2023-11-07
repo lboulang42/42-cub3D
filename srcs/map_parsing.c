@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:18:06 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/06 21:25:05 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:46:39 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,30 +128,6 @@ void check_double_backnmap(char *mapbuff)
 	}
 }
 
-/*
-
-int	is_asset_to_load(char *str)
-{
-	t_data	*data;
-
-	data = starton();
-	if (starts_with(str, "NO "))
-		return (test_asset(str, &data->north_texture_path, 1), 1);
-	if (starts_with(str, "SO "))
-		return (test_asset(str, &data->south_texture_path, 1), 1);
-	if (starts_with(str, "WE "))
-		return (test_asset(str, &data->west_texture_path, 1), 1);
-	if (starts_with(str, "EA "))
-		return (test_asset(str, &data->east_texture_path, 1), 1);
-	if (starts_with(str, "F "))
-		return (test_asset(str, &data->floor_texture_path, 0), 1);
-	if (starts_with(str, "C "))
-		return (test_asset(str, &data->ceiling_texture_path, 0), 1);
-	return (0);
-}
-
-*/
-
 int get_next_n(char *str, int i)
 {
 	int j = 0;
@@ -214,7 +190,9 @@ void check_end_buffer(char *map, int i)
 	while (map[i] && is_white_space(map[i]))
 		i++;
 
-	while (map[i +1])
+	if (!map[i])
+		error_exit("moha fumier");
+	while (map[i+1])
 	{
 		if (map[i] == '\n' && map[i+1] == '\n')
 			error_exit("empty line in map");
@@ -374,10 +352,10 @@ char *get_pathfindline(int lenline)
 	int	i;
 
 	i = -1;
-	line = malloc(sizeof(char) * (lenline+1));
+	line = malloc(sizeof(char) * (lenline+2));
 	if (!line)
 		error_exit("mall error");
-	while (++i < lenline)
+	while (++i < lenline +1)
 		line[i] = ' ';
 	line[i] = '\0';
 	return (line);
@@ -402,7 +380,7 @@ void mapcpy2(char **basemap)
 	//handle error
 	while (basemap[++i])
 	{
-		data->pathfindmap[i+1] = malloc(sizeof(char) * (lenline+1));
+		data->pathfindmap[i+1] = malloc(sizeof(char) * (lenline+2));
 		if (!data->pathfindmap[i+1])
 		{
 			while (i > 0)
@@ -420,29 +398,35 @@ void mapcpy2(char **basemap)
 			data->pathfindmap[i+1][j+1] = basemap[i][j];
 		while (j < lenline)
 		{
-			data->pathfindmap[i+1][j] = ' ';
+			data->pathfindmap[i+1][j+1] = ' ';
 			j++;
 		}
-		data->pathfindmap[i+1][j] = '\0';
+		data->pathfindmap[i+1][j+1] = '\0';
 	}
 	data->pathfindmap[i+1] = get_pathfindline((lenline));
 	//handle error
 	data->pathfindmap[i+2] = NULL;
-	ft_print_tab(basemap);
-	ft_print_tab(data->pathfindmap);
 }
 
 void pthfnd(char **map, int i, int j)
 {
-	ft_print_tab(map);
+	int lim_j = ft_strlen(map[0]) -1;
+	// printf("checking for i = %d j = %d\n", i, j);
+	int lim_i = tab_len(map) -1;
+	// ft_print_tab(map);
 	if (map[i][j] == '0')
-		error_exit("void touche un 0");
+	{
+		printf("touche un 0 in %d %d", i , j);
+		freetab((void **)map);
+		error_exit("void touche un 0 in ");
+	}
 	map[i][j] = '?';
-	if (map[i][j+1] != '1' && map[i][j+1] != '?')//decal a droite
+
+	if (j < lim_j && map[i][j+1] != '1' && map[i][j+1] != '?')
 		pthfnd(map, i, j+1);
-	if (map[i][j-1] != '1' && map[i][j-1] != '?')//decal a gauche
+	if (j > 0 && map[i][j-1] != '1' && map[i][j-1] != '?')//decal a gauche
 		pthfnd(map, i, j -1);
-	if (map[i+1] && map[i+1][j] != '1' && map[i+1][j] != '?')
+	if (i < lim_i && map[i+1][j] != '1' && map[i+1][j] != '?')
 		pthfnd(map, i+1, j);
 	if (i > 0 && map[i-1][j] != '1' && map[i-1][j] != '?')
 		pthfnd(map, i-1, j);
@@ -452,9 +436,16 @@ void reverse_pathfind(void)
 {
 	t_data *data;
 	data = starton();
-	
-	
 
+	pthfnd(data->pathfindmap, 0, 0);
+	int i = -1;
+	while (data->pathfindmap[++i])
+	{
+		int j = -1;
+		while (data->pathfindmap[i][++j])
+			if (data->pathfindmap[i][j] == ' ')
+				pthfnd(data->pathfindmap, i, j);
+	}
 }
 
 
@@ -464,16 +455,16 @@ void check_game_map(char **map)
 	int start_i;
 	int start_j;
 	char start_pos;
+	t_data *data = starton();
+	
 	i = -1;
 	check_charset(map);
 	get_start_coord(map, &start_i, &start_j);
-	
-
 	start_pos = map[start_i][start_j];
 	map[start_i][start_j] = '0';
 	mapcpy2(map);
 	reverse_pathfind();
-	// check_spaces_map(map);
+	freetab((void **)data->pathfindmap);
 	map[start_i][start_j] = start_pos;
 }
 
@@ -489,10 +480,12 @@ void	read_map(t_data *data)
 	check_map_buffer(data->map_buffer);
 	data->map = ft_split(data->map_buffer, '\n');
 	if (!data->map || !*data->map)
+	{
 		error_exit("Error Splitting Map Buffer");
+	}
 	replace_whitespace(data->map);
 	index_map_start = detect_start_map(data->map);
 	create_game_map(data, index_map_start, tab_len(data->map));
 	check_game_map(data->game_map);
-	// print_loaded_data();
+	print_loaded_data();
 }

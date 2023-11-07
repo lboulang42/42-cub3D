@@ -6,13 +6,12 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:35:29 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:47:34 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// temp
 void	print_loaded_data(void)
 {
 	t_data	*data;
