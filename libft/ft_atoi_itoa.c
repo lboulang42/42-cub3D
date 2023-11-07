@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:22:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/04/22 18:57:08 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 22:04:26 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ int	ft_atoi(const char *nptr)
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + nptr[i] - 48;
+		if (result > 255)
+			return (-1);
 		i++;
 	}
 	result *= sign;
-	return (result);
+	return ((int)result);
 }

@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:18:06 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/07 18:46:39 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 22:36:18 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	create_game_map(t_data *data, int map_start, int map_end)
 	int	len;
 
 	i = 0;
-	data->game_map = malloc(sizeof(char *) * (map_end - map_start +1));
+	data->game_map = malloc(sizeof(char *) * (map_end - map_start + 1));
 	while (data->map[map_start + i])
 	{
 		len = ft_strlen(data->map[map_start + i]);
-		data->game_map[i] = malloc(sizeof(char) * (len +1));
+		data->game_map[i] = malloc(sizeof(char) * (len + 1));
 		j = -1;
 		while (data->map[map_start + i][++j])
 			data->game_map[i][j] = data->map[map_start + i][j];
@@ -109,72 +109,75 @@ void	create_game_map(t_data *data, int map_start, int map_end)
 	data->game_map[i] = NULL;
 }
 
-void check_double_backnmap(char *mapbuff)
+void	check_double_backnmap(char *mapbuff)
 {
-	int i = -1;
-	int isfirst = 1;
+	int	i;
+	int	isfirst;
 
-	while (mapbuff[++i +1])
+	i = -1;
+	isfirst = 1;
+	while (mapbuff[++i + 1])
 	{
 		if (mapbuff[i] == '\n')
 		{
-			if (mapbuff[i+1] == '\n')
+			if (mapbuff[i + 1] == '\n')
 				printf("double\\n\n");
 			else
 				isfirst = 1;
-			continue;
+			continue ;
 		}
 		isfirst = 0;
 	}
 }
 
-int get_next_n(char *str, int i)
+int	get_next_n(char *str, int i)
 {
-	int j = 0;
+	int	j;
 
-	while (str[i+j] != '\n')
+	j = 0;
+	while (str[i + j] != '\n')
 		j++;
 	return (j);
 }
 
-int checksub(char *str)
+int	checksub(char *str)
 {
 	// (void)str;
 	printf("testing sub : %s\n", str);
 	return (1);
 }
 
-int test_line(char *str, int start, int end, int checked)
+int	test_line(char *str, int start, int end, int checked)
 {
+	int	i;
+
 	(void)str;
 	(void)start;
 	(void)end;
 	(void)checked;
-	int i = start;
+	i = start;
 	while (is_white_space(str[i]))
 		i++;
-
-	return 1;
+	return (1);
 }
 
-int is_asset_name(char c1, char c2)
+int	is_asset_name(char c1, char c2)
 {
 	if (c1 == 'C')
-		return 1;
+		return (1);
 	if (c1 == 'F')
-		return 1;
+		return (1);
 	if (c1 == 'N' && c2 == 'O')
-		return 1;
+		return (1);
 	if (c1 == 'W' && c2 == 'E')
-		return 1;
+		return (1);
 	if (c1 == 'E' && c2 == 'A')
-		return 1;
+		return (1);
 	if (c1 == 'S' && c2 == 'O')
-		return 1;
+		return (1);
 	printf("%c %c\n", c1, c2);
-	return 0;
+	return (0);
 }
-
 
 /*
 skip derniere line de description
@@ -182,49 +185,49 @@ skip les lignes vides avant la map
 check si double \n dans la map
 check si le dernier char n'est pas un \n
 */
-void check_end_buffer(char *map, int i)
+void	check_end_buffer(char *map, int i)
 {
 	while (map[i] && map[i] != '\n')
 		i++;
-
 	while (map[i] && is_white_space(map[i]))
 		i++;
-
 	if (!map[i])
 		error_exit("moha fumier");
-	while (map[i+1])
+	while (map[i])
 	{
-		if (map[i] == '\n' && map[i+1] == '\n')
+		if (map[i] == '\n' && map[i + 1] == '\n')
 			error_exit("empty line in map");
 		i++;
 	}
-	/**/
 	if (map[i] == '\n')
 		error_exit("Map Last char is a \\n");
 }
 
-void check_map_buffer(char *map)
+void	check_map_buffer(char *map)
 {
-	int i;
-	int start_line = 0;
-	int loaded = 0;
+	int	i;
+	int	start_line;
+	int	loaded;
+
+	start_line = 0;
+	loaded = 0;
 	i = 0;
-	while (map[i +1] && loaded < 6)
+	while (map[i] && loaded < 6)
 	{
-		if (i == start_line && is_asset_name(map[i], map[i+1]))
+		if (i == start_line && is_asset_name(map[i], map[i + 1]))
 			loaded++;
 		if (map[i] == '\n')
 		{
-			if (map[i+1] == '\n')
+			if (map[i + 1] == '\n')
 				i++;
-			start_line = i+1;
+			start_line = i + 1;
 		}
 		i++;
 	}
 	check_end_buffer(map, i);
 }
 
-void tamere(t_data *data)
+void	tamere(t_data *data)
 {
 	data->ceiling_texture_path = NULL;
 	data->floor_texture_path = NULL;
@@ -236,70 +239,74 @@ void tamere(t_data *data)
 
 void	check_charset(char **map)
 {
-	int i;
-	int j;
-	int startpoint = 0;
+	int	i;
+	int	j;
+	int	startpoint;
+
+	startpoint = 0;
 	i = -1;
 	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
+		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != ' ')
 			{
-				if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == 'S')
-				{
-					if (startpoint == 0)
-						startpoint++;
-					else
-						error_exit("Too many starting points in the map");
-				}
+				if (ft_strchr("NSEW", map[i][j]))
+					startpoint++;
 				else
 					error_exit("charset error");
 			}
+		}
 	}
-	if (startpoint == 0)
-		error_exit("no starting point");
+	if (startpoint != 1)
+		error_exit("starting point error");
 }
 
-void get_start_coord(char **map, int *starti, int *startj)
+void	get_start_coord(char **map, int *starti, int *startj)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	i = -1;
 	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
-			if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == 'S')
+		{
+			if (ft_strchr("NSEW", map[i][j]))
 			{
 				*starti = i;
 				*startj = j;
-				// printf("insisde i = %d j = %d", i , j);
 			}
+		}
 	}
 }
 
-void pathfind(char **map, int start_i, int start_j)
+void	pathfind(char **map, int start_i, int start_j)
 {
 	(void)map;
 	(void)start_i;
 	(void)start_j;
 }
 
-int valid_space(char c, char *charset)
+int	valid_space(char c, char *charset)
 {
-	int i;
-	 i= -1;
+	int	i;
+
+	i = -1;
 	while (charset[++i])
 		if (c == charset[i])
-			return 1;
-	return 0;
+			return (1);
+	return (0);
 }
 
-void check_spaces_map(char **map)
+void	check_spaces_map(char **map)
 {
-	int j;
-	int i = -1;
+	int	j;
+	int	i;
+
+	i = -1;
 	while (map[++i])
 	{
 		j = -1;
@@ -307,35 +314,23 @@ void check_spaces_map(char **map)
 		{
 			if (map[i][j] == ' ')
 			{
-				if (i > 0 && (j < (int)ft_strlen(map[i-1])) && map[i-1][j] && map[i-1][j] == '0')
-				{
-					printf("%d%d invalid ascii : %d\n", i, j, map[i-1][j]);
+				if (i > 0 && (j < (int)ft_strlen(map[i - 1])) && map[i - 1][j]
+					&& map[i - 1][j] == '0')
 					error_exit("trou");
-				}
-				if (map[i+1] && map[i+1][j] && map[i+1][j] == '0')
-				{
-					printf("%d%d invalid ascii : %d\n", i, j, map[i+1][j]);
+				if (map[i + 1] && map[i + 1][j] && map[i + 1][j] == '0')
 					error_exit("trou");
-				}
-				if (map[i][j+1] && map[i][j+1] == '0')
-				{
-					printf("%d%d invalid ascii : %d\n", i, j, map[i][j+1]);
+				if (map[i][j + 1] && map[i][j + 1] == '0')
 					error_exit("trou");
-				}
-				if (j > 0 && map[i][j-1] && map[i][j-1] == '0')
-				{
-					printf("%d%d invalid ascii : %d\n", i, j, map[i][j-1]);
+				if (j > 0 && map[i][j - 1] && map[i][j - 1] == '0')
 					error_exit("trou");
-				}
 			}
 		}
 	}
-
 }
 
-int get_lenline(char **map)
+int	get_lenline(char **map)
 {
-	int lenline;
+	int	lenline;
 	int	i;
 
 	i = -1;
@@ -346,137 +341,127 @@ int get_lenline(char **map)
 	return (lenline);
 }
 
-char *get_pathfindline(int lenline)
+char	*get_pathfindline(int lenline)
 {
-	char *line;
-	int	i;
+	char	*line;
+	int		i;
 
 	i = -1;
-	line = malloc(sizeof(char) * (lenline+2));
+	line = malloc(sizeof(char) * (lenline + 2));
 	if (!line)
 		error_exit("mall error");
-	while (++i < lenline +1)
+	while (++i < lenline + 1)
 		line[i] = ' ';
 	line[i] = '\0';
 	return (line);
 }
 
-void mapcpy2(char **basemap)
+void	mapcpy2(char **basemap, t_data *data)
 {
-	t_data	*data;
-	int lenline;
-	int tabsize;
-	int	i;
-	int j;
+	int		lenline;
+	int		tabsize;
+	int		i;
+	int		j;
 
-	lenline = get_lenline(basemap)+2;//ya une couille avec ca sa mere
-	tabsize = tab_len(basemap)+2;
-	data = starton();
-	data->pathfindmap = malloc(sizeof(char *) * (tabsize+1));
+	lenline = get_lenline(basemap) + 2; //ya une couille avec ca sa mere
+	tabsize = tab_len(basemap) + 2;
+	data->pathfindmap = ft_calloc(sizeof(char *), (tabsize + 1));
 	if (!data->pathfindmap)
 		error_exit("mall error");
-	i = -1;
 	data->pathfindmap[0] = get_pathfindline(lenline);
-	//handle error
+	i = -1;
 	while (basemap[++i])
 	{
-		data->pathfindmap[i+1] = malloc(sizeof(char) * (lenline+2));
-		if (!data->pathfindmap[i+1])
-		{
-			while (i > 0)
-			{
-				free(data->pathfindmap[i]);
-				i--;
-			}
-			free(data->pathfindmap);
-			error_exit("malloc errorrrr");
-		}
-		//handle error
-		data->pathfindmap[i+1][0] = ' ';//ca copie pas au bout
+		data->pathfindmap[i + 1] = ft_calloc(sizeof(char), (lenline + 2));
+		if (!data->pathfindmap[i + 1])
+			return (free_tab(data->pathfindmap), error_exit("malloc errorrrr"));
+		data->pathfindmap[i + 1][0] = ' ';
 		j = -1;
 		while (basemap[i][++j])
-			data->pathfindmap[i+1][j+1] = basemap[i][j];
+			data->pathfindmap[i + 1][j + 1] = basemap[i][j];
 		while (j < lenline)
-		{
-			data->pathfindmap[i+1][j+1] = ' ';
-			j++;
-		}
-		data->pathfindmap[i+1][j+1] = '\0';
+			data->pathfindmap[i + 1][j++ + 1] = ' ';
 	}
-	data->pathfindmap[i+1] = get_pathfindline((lenline));
-	//handle error
-	data->pathfindmap[i+2] = NULL;
+	data->pathfindmap[i + 1] = get_pathfindline((lenline));
 }
 
-void pthfnd(char **map, int i, int j)
+void	pthfnd(char **map, int i, int j)
 {
-	int lim_j = ft_strlen(map[0]) -1;
-	// printf("checking for i = %d j = %d\n", i, j);
-	int lim_i = tab_len(map) -1;
-	// ft_print_tab(map);
+	int	lim_j;
+	int	lim_i;
+
+	lim_j = ft_strlen(map[0]) - 1;
+	lim_i = tab_len(map) - 1;
 	if (map[i][j] == '0')
 	{
-		printf("touche un 0 in %d %d", i , j);
+		printf("touche un 0 in %d %d", i, j);
 		freetab((void **)map);
 		error_exit("void touche un 0 in ");
 	}
 	map[i][j] = '?';
-
-	if (j < lim_j && map[i][j+1] != '1' && map[i][j+1] != '?')
-		pthfnd(map, i, j+1);
-	if (j > 0 && map[i][j-1] != '1' && map[i][j-1] != '?')//decal a gauche
-		pthfnd(map, i, j -1);
-	if (i < lim_i && map[i+1][j] != '1' && map[i+1][j] != '?')
-		pthfnd(map, i+1, j);
-	if (i > 0 && map[i-1][j] != '1' && map[i-1][j] != '?')
-		pthfnd(map, i-1, j);
+	if (j < lim_j && map[i][j + 1] != '1' && map[i][j + 1] != '?')
+		pthfnd(map, i, j + 1);
+	if (j > 0 && map[i][j - 1] != '1' && map[i][j - 1] != '?') //decal a gauche
+		pthfnd(map, i, j - 1);
+	if (i < lim_i && map[i + 1][j] != '1' && map[i + 1][j] != '?')
+		pthfnd(map, i + 1, j);
+	if (i > 0 && map[i - 1][j] != '1' && map[i - 1][j] != '?')
+		pthfnd(map, i - 1, j);
 }
 
-void reverse_pathfind(void)
+void	reverse_pathfind(void)
 {
-	t_data *data;
-	data = starton();
+	t_data	*data;
+	int		i;
+	int		j;
 
+	data = starton();
 	pthfnd(data->pathfindmap, 0, 0);
-	int i = -1;
+	i = -1;
 	while (data->pathfindmap[++i])
 	{
-		int j = -1;
+		j = -1;
 		while (data->pathfindmap[i][++j])
 			if (data->pathfindmap[i][j] == ' ')
 				pthfnd(data->pathfindmap, i, j);
 	}
 }
 
-
-void check_game_map(char **map)
+void	check_game_map(char **map, t_data *data)
 {
-	int i;
-	int start_i;
-	int start_j;
-	char start_pos;
-	t_data *data = starton();
-	
+	int		i;
+	int		start_i;
+	int		start_j;
+	char	start_pos;
+	int		j;
+
 	i = -1;
 	check_charset(map);
 	get_start_coord(map, &start_i, &start_j);
 	start_pos = map[start_i][start_j];
 	map[start_i][start_j] = '0';
-	mapcpy2(map);
+	mapcpy2(map, data);
 	reverse_pathfind();
-	freetab((void **)data->pathfindmap);
-	map[start_i][start_j] = start_pos;
+	data->pathfindmap[start_i][start_j] = start_pos;
+	while (data->pathfindmap[++i])
+	{
+		j = -1;
+		while (data->pathfindmap[i][++j])
+			if (data->pathfindmap[i][j] == '?')
+				data->pathfindmap[i][j] = ' ';
+	}
+	free_tab(data->game_map);
+	data->game_map = data->pathfindmap;
 }
 
 void	read_map(t_data *data)
 {
 	int	index_map_start;
-	// char **tmp;
 
 	data->map_buffer = gnl_str(data->fd_map);
 	if (!data->map_buffer || !*data->map_buffer)
 		error_exit(ERR_EMPTYMAP);
-	tamere(data);	
+	tamere(data);
 	check_map_buffer(data->map_buffer);
 	data->map = ft_split(data->map_buffer, '\n');
 	if (!data->map || !*data->map)
@@ -486,6 +471,5 @@ void	read_map(t_data *data)
 	replace_whitespace(data->map);
 	index_map_start = detect_start_map(data->map);
 	create_game_map(data, index_map_start, tab_len(data->map));
-	check_game_map(data->game_map);
-	print_loaded_data();
+	check_game_map(data->game_map, data);
 }

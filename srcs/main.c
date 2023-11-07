@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/07 18:47:34 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/07 19:33:15 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ t_data	*starton(void)
 	return (&data);
 }
 
-void	init_data(t_data *data)
-{
-	data->fd_map = -1;
-}
-
 int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
@@ -47,6 +42,9 @@ int	main(int ac, char **av, char **env)
 		error_exit("No env");
 	data = starton();
 	parse(ac, av, data);
-	clear_data(data);
+	print_loaded_data();
+	do_exec(data);
+	// clear_data(data);
+	
 	return (0);
 }

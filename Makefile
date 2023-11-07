@@ -6,7 +6,7 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 19:43:05 by lboulang          #+#    #+#              #
-#    Updated: 2023/10/26 01:34:04 by lboulang         ###   ########.fr        #
+#    Updated: 2023/11/07 18:56:31 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,16 @@ SRCS_NAMES 		=	assets_parsing.c\
 					main.c\
 					map_parsing.c\
 					parsing.c\
-					utils.c
+					utils.c\
+					exec_main.c \
+					exec_init.c \
+					exec_utils.c \
+					exec_utils2.c \
+					exec_movement.c \
+					exec_define_wallx.c \
+					exec_free.c \
+					exec_do_calc.c \
+					exec_key.c \
 
 LIBFT			=	libft.a
 
@@ -57,7 +66,7 @@ all:	${NAME}
 
 $(NAME): $(DIR_OBJS) $(OBJS)
 	make -C libft
-	$(CC) $(CFLAGS) ${INC} $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) ${INC} minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a -L. -lXext -lX11 -lm $(LIB) -o $(NAME)
 	@echo "\033[31;5mcub3D\033[0m"
 
 $(OBJS) : $(DIR_OBJS)/%.o : $(DIR_SRCS)/%.c
