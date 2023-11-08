@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:25:27 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 22:14:06 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:09:54 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	initializebuff(t_data *data)
 
 	i = -1;
 	j = -1;
-	while (++i < height)
-		while (++j < width)
+	while (++i < HEIGHT)
+		while (++j < WIDTH)
 			data->bufmap[i][j] = 0;
 }

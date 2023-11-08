@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:28:20 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 20:28:01 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:09:49 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	move_down(t_data *data)
 	if (pos_y == '0')
 		data->posy -= data->diry * data->movespeed;
 }
+
 void	move_left(t_data *data)
 {
 	if (data->game_map[(int)(data->posy)][(int)(data->posx - data->diry

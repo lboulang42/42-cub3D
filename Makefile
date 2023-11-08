@@ -6,29 +6,33 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 19:43:05 by lboulang          #+#    #+#              #
-#    Updated: 2023/11/07 18:56:31 by lboulang         ###   ########.fr        #
+#    Updated: 2023/11/08 13:55:55 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= 	cub3D
 
-SRCS_NAMES 		=	assets_parsing.c\
-					cub_parsing.c\
+SRCS_NAMES 		=	parsing/gnl.c\
+					parsing/parsing_args.c\
+					parsing/parsing_assets.c\
+					parsing/parsing_colors.c\
+					parsing/parsing_main.c\
+					parsing/parsing_map.c\
+					parsing/parsing_mapbuffer.c\
+					parsing/parsing_pathfind.c\
+					parsing/parsing_readmap.c\
+					exec/exec_define_wallx.c\
+					exec/exec_do_calc.c\
+					exec/exec_free.c\
+					exec/exec_init.c\
+					exec/exec_key.c\
+					exec/exec_main.c\
+					exec/exec_movement.c\
+					exec/exec_utils.c\
+					exec/exec_utils2.c\
 					error.c\
-					gnl.c\
 					main.c\
-					map_parsing.c\
-					parsing.c\
-					utils.c\
-					exec_main.c \
-					exec_init.c \
-					exec_utils.c \
-					exec_utils2.c \
-					exec_movement.c \
-					exec_define_wallx.c \
-					exec_free.c \
-					exec_do_calc.c \
-					exec_key.c \
+					utils.c
 
 LIBFT			=	libft.a
 
@@ -74,6 +78,8 @@ $(OBJS) : $(DIR_OBJS)/%.o : $(DIR_SRCS)/%.c
 
 $(DIR_OBJS):
 	mkdir -p $(DIR_OBJS)
+	mkdir -p objs/parsing
+	mkdir -p objs/exec
 
 clean:
 	make clean -C libft

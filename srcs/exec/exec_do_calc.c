@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:48:49 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 19:55:53 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:12:10 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	fill_colors_array(char **str, char **str1, t_data *data)
 	int	i;
 
 	i = 0;
-
 	while (i < 3)
 	{
 		if (str[i])
@@ -48,7 +47,7 @@ void	ceiling_or_floor(t_data *data, int x, int q)
 	i = 0;
 	if (q == 0)
 	{
-		while (i < data->drawstart && i < height)
+		while (i < data->drawstart && i < HEIGHT)
 		{
 			data->bufmap[i][x] = set_rgb(data->ceiling_colors);
 			i++;
@@ -56,7 +55,7 @@ void	ceiling_or_floor(t_data *data, int x, int q)
 		return ;
 	}
 	y = data->drawend;
-	while (y < height)
+	while (y < HEIGHT)
 	{
 		data->bufmap[y][x] = set_rgb(data->floor_colors);
 		y++;
@@ -72,8 +71,8 @@ void	boucle_a(t_data *data, int x, int texNum, int texX)
 	int		y;
 
 	y = data->drawstart;
-	step = 1.0 * 64 / data->lineHeight;
-	texpos = (data->drawstart - height / 2 + data->lineHeight / 2) * step;
+	step = 1.0 * 64 / data->lineheight;
+	texpos = (data->drawstart - HEIGHT / 2 + data->lineheight / 2) * step;
 	while (y < data->drawend)
 	{
 		texy = (int)texpos & (64 - 1);

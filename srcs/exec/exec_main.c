@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 20:57:40 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:09:43 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	calc(t_data *data)
 	tex_largeur = 64;
 	x = 0;
 	initializebuff(data);
-	while (x < width-1)
+	while (x < WIDTH -1)
 	{
 		define_wallx(data, &wallx, &texture_number, x);
 		wallx -= floor(wallx);
@@ -45,12 +45,12 @@ void	draw(t_data *data)
 	int	x;
 
 	y = 0;
-	while (y < height)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < width)
+		while (x < WIDTH)
 		{
-			data->addr[y * width + x] = data->bufmap[y][x];
+			data->addr[y * WIDTH + x] = data->bufmap[y][x];
 			x++;
 		}
 		y++;
@@ -86,16 +86,16 @@ int	do_exec(t_data *data)
 
 	i = -1;
 	do_all_init(data);
-	data->bufmap = ft_calloc(sizeof(int *), height);
+	data->bufmap = ft_calloc(sizeof(int *), HEIGHT);
 	if (!data->bufmap)
 		free_exit(data);
-	while (++i < height)
+	while (++i < HEIGHT)
 	{
-		data->bufmap[i] = ft_calloc(sizeof(int), width * 4 + 1000);
+		data->bufmap[i] = ft_calloc(sizeof(int), WIDTH * 4 + 1000);
 		if (!data->bufmap)
 			free_exit(data);
 	}
-	data->image = mlx_new_image(data->mlx_ptr, width, height);
+	data->image = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->image)
 		return (free_mlx(data), 0);
 	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,

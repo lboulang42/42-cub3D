@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:32:53 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 21:55:46 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:11:57 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	init_values(t_data *data, int x)
 	double	camerax;
 
 	if (data->side == 0)
-		data->perpWalldist = (data->mapx - data->posx + (1 - data->stepx) / 2)
+		data->perpwalldist = (data->mapx - data->posx + (1 - data->stepx) / 2)
 			/ data->raydirx;
 	else
-		data->perpWalldist = (data->mapy - data->posy + (1 - data->stepy) / 2)
+		data->perpwalldist = (data->mapy - data->posy + (1 - data->stepy) / 2)
 			/ data->raydiry;
 	data->mapx = data->posx;
 	data->mapy = data->posy;
-	camerax = 2 * x / (double)width - 1;
+	camerax = 2 * x / (double)WIDTH - 1;
 	data->raydirx = data->dirx + data->planex * camerax;
 	data->raydiry = data->diry + data->planey * camerax;
 	data->deltadistx = fabs(1 / data->raydirx);
@@ -60,9 +60,6 @@ void	define_side(t_data *data)
 	int	hit;
 
 	hit = 0;
-	// for (int i = 0; data->game_map[i]; i++)
-	// 	printf("{%s}\n", data->game_map[i]);
-	// exit(1);
 	while (hit == 0)
 	{
 		if (data->sidedistx < data->sidedisty)
@@ -81,15 +78,16 @@ void	define_side(t_data *data)
 			hit = 1;
 	}
 }
+
 void	define_draw(t_data *data)
 {
-	data->lineHeight = (int)(height / data->perpWalldist);
-	data->drawstart = -data->lineHeight / 2 + height / 2;
+	data->lineheight = (int)(HEIGHT / data->perpwalldist);
+	data->drawstart = -data->lineheight / 2 + HEIGHT / 2;
 	if (data->drawstart < 0)
 		data->drawstart = 0;
-	data->drawend = data->lineHeight / 2 + height / 2;
-	if (data->drawend >= height || data->drawend < 0)
-		data->drawend = height - 1;
+	data->drawend = data->lineheight / 2 + HEIGHT / 2;
+	if (data->drawend >= HEIGHT || data->drawend < 0)
+		data->drawend = HEIGHT - 1;
 }
 
 void	define_wallx(t_data *data, double *wallx, int *texture_number, int x)
@@ -100,7 +98,7 @@ void	define_wallx(t_data *data, double *wallx, int *texture_number, int x)
 	define_draw(data);
 	*texture_number = choose_texture(data, *texture_number);
 	if (data->side == 0)
-		*wallx = data->posy + data->perpWalldist * data->raydiry;
+		*wallx = data->posy + data->perpwalldist * data->raydiry;
 	else
-		*wallx = data->posx + data->perpWalldist * data->raydirx;
+		*wallx = data->posx + data->perpwalldist * data->raydirx;
 }

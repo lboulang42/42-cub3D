@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 22:47:13 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:09:13 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	set_up_mlx(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (0);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, width, height, "cub3d");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3d");
 	if (!data->win_ptr)
 		return (free_mlx(data), 0);
 	return (1);
@@ -42,7 +42,7 @@ void	init_sight_direction(t_data *data)
 	else if (data->player_letter == 'S')
 	{
 		data->dirx = 0;
-		data->diry = 1; 
+		data->diry = 1;
 	}
 	else if (data->player_letter == 'W')
 	{
@@ -64,8 +64,7 @@ void	init_all_settings(t_data *data)
 	data->rotspeed = 0.01;
 	printf("%s\n%s\n", data->floor_texture_path, data->ceiling_texture_path);
 	fill_colors_array(ft_split(data->floor_texture_path, ','),
-						ft_split(data->ceiling_texture_path, ','),
-						data);
+		ft_split(data->ceiling_texture_path, ','), data);
 }
 
 void	init_texture(t_data *data)

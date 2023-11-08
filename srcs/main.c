@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/07 19:33:15 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:01:04 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ int	main(int ac, char **av, char **env)
 	parse(ac, av, data);
 	print_loaded_data();
 	do_exec(data);
-	// clear_data(data);
-	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:42:53 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/07 20:01:03 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:08:42 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	free_mlx(t_data *data)
 	i = -1;
 	if (data->bufmap)
 	{
-		while (++i < height)
+		while (++i < HEIGHT)
 			free(data->bufmap[i]);
 		free(data->bufmap);
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 18:10:27 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:33:17 by lboulang         ###   ########.fr       */
+/*   Created: 2023/11/08 12:15:27 by lboulang          #+#    #+#             */
+/*   Updated: 2023/11/08 13:42:35 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_extension(char *str)
 		error_exit("map not a .cub");
 }
 
-void	parse_av1(int ac, char **av, t_data *data)
+void	parse_av(int ac, char **av, t_data *data)
 {
 	int	fd_map;
 
