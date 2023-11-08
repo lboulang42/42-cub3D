@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:27:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 13:40:37 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:06:49 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	test_asset_color(char **path, char **stock_ptr)
 	int		j;
 
 	i = -1;
-	if (tab_len(path) != 2)
+	if (tab_len(path) != 2)/*handle tablen == 0*/
 		return (freetab((void **)path), error_exit(ERR_TCOLOR));
 	colors = ft_split(path[1], ',');
 	if (!colors)
-		return (freetab((void **)path), error_exit("Split error"));
+		return (freetab((void **)path), error_exit(ERR_MAL));
 	if (tab_len(colors) != 3)
-		return (freetab((void **)colors), freetab((void **)path), error_exit("need 3 RGB colors"));
+		return (freetab((void **)colors), freetab((void **)path), error_exit(ERR_TCOLOR));
 	while (++i < 3)
 	{
 		j = -1;
@@ -58,16 +58,17 @@ void	test_asset_path(char **path, char **stock_ptr)
 	int	fd;
 
 	if (tab_len(path) != 2)
+    {
+        ft_print_tab(path);
+        printf("%d\n", tab_len(path));
 		return (freetab((void **)path), error_exit(ERR_TPATH));
+    }
 	fd = open(path[1], O_RDONLY);
 	if (fd == -1)
-		return (freetab((void **)path), error_exit("Can't open texture path"));
+		return (freetab((void **)path), error_exit(ERR_TEXT));
 	close(fd);
 	if (*stock_ptr)
-	{
-		freetab((void **)path);
-		error_exit("you cant load 2 texture for the same assset ;)");
-	}
+        return (freetab((void **)path), error_exit(ERR_TEXTDUP));
 	*stock_ptr = ft_strdup(path[1]);
 }
 
@@ -78,7 +79,7 @@ void	test_asset(char *asset_line, char **ptr, int op)
 
 	tmp = ft_split(asset_line, ' ');
 	if (!tmp)
-		error_exit("Split error for texture path");
+		error_exit(ERR_MAL);
 	if (op)
 		test_asset_path(tmp, ptr);
 	else

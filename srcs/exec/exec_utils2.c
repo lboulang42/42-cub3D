@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:47:05 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 12:00:52 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:50:02 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	revserse_map(t_data *data)
 
 	i = -1;
 	while (data->game_map[++i])
-	{
 		ft_reverse(data->game_map[i]);
-		printf("[%s]\n", data->game_map[i]);
-	}
 	return (0);
 }
 

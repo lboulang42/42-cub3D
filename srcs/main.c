@@ -6,12 +6,13 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:51:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 12:01:04 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:49:26 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*debugging*/
 void	print_loaded_data(void)
 {
 	t_data	*data;
@@ -42,7 +43,6 @@ int	main(int ac, char **av, char **env)
 		error_exit("No env");
 	data = starton();
 	parse(ac, av, data);
-	print_loaded_data();
 	do_exec(data);
 	return (0);
 }

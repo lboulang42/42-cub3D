@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:29:03 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 13:40:25 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:59:32 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	check_charset(char **map)
 				if (ft_strchr("NSEW", map[i][j]))
 					startpoint++;
 				else
-					error_exit("charset error");
+					error_exit(ERR_CHARSET);
 			}
 		}
 	}
 	if (startpoint != 1)
-		error_exit("starting point error");
+		error_exit(ERR_START);
 }
 
 void	get_start_coord(char **map, int *starti, int *startj)

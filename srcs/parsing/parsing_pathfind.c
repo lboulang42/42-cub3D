@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:33:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 13:38:04 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:03:42 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_pathfindline(int lenline)
 	i = -1;
 	line = malloc(sizeof(char) * (lenline + 2));
 	if (!line)
-		error_exit("mall error");
+		error_exit(ERR_MAL);
 	while (++i < lenline + 1)
 		line[i] = ' ';
 	line[i] = '\0';
@@ -35,11 +35,7 @@ void	pthfnd(char **map, int i, int j)
 	lim_j = ft_strlen(map[0]) - 1;
 	lim_i = tab_len(map) - 1;
 	if (map[i][j] == '0')
-	{
-		printf("touche un 0 in %d %d", i, j);
-		freetab((void **)map);
-		error_exit("void touche un 0 in ");
-	}
+        return (freetab((void **)map), error_exit(E_MNOTCLOSE));
 	map[i][j] = '?';
 	if (j < lim_j && map[i][j + 1] != '1' && map[i][j + 1] != '?')
 		pthfnd(map, i, j + 1);
@@ -93,14 +89,14 @@ void	do_pathfindmap(char **basemap, t_data *data)
 	tabsize = tab_len(basemap) + 2;
 	data->pathfindmap = ft_calloc(sizeof(char *), (tabsize + 1));
 	if (!data->pathfindmap)
-		error_exit("mall error");
+		error_exit(ERR_MAL);
 	data->pathfindmap[0] = get_pathfindline(lenline);
 	i = -1;
 	while (basemap[++i])
 	{
 		data->pathfindmap[i + 1] = ft_calloc(sizeof(char), (lenline + 2));
 		if (!data->pathfindmap[i + 1])
-			return (free_tab(data->pathfindmap), error_exit("malloc errorrrr"));
+			return (free_tab(data->pathfindmap), error_exit(ERR_MAL));
 		data->pathfindmap[i + 1][0] = ' ';
 		j = -1;
 		while (basemap[i][++j])

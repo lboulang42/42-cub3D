@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 14:09:13 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:49:57 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	init_all_settings(t_data *data)
 	data->planey = 0.66 * (data->dirx * -1);
 	data->movespeed = 0.01;
 	data->rotspeed = 0.01;
-	printf("%s\n%s\n", data->floor_texture_path, data->ceiling_texture_path);
 	fill_colors_array(ft_split(data->floor_texture_path, ','),
 		ft_split(data->ceiling_texture_path, ','), data);
 }

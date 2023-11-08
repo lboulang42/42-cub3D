@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 00:59:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/10/26 01:59:23 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:20:20 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	starts_with(char *str, char *sub)
 	i = 0;
 	while (str[i] && is_white_space(str[i]))
 		i++;
+	if (!str[i])
+		return (0);
 	j = 0;
 	while (str[i + j] && sub[j])
 	{

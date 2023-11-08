@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 14:11:47 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:22:29 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,33 @@
 # include <string.h> //perror
 # include <unistd.h> //close exit
 
+# ifndef ERR_START
+#  define ERR_START "Your map must contain only one starting point (N/S/E/W)"
+# endif
+# ifndef ERR_CHARSET
+
+#  define ERR_CHARSET "Your map must only contains char from this charset : \
+	[0,1, ,N,S,E,W]"
+# endif
+
+# ifndef ERR_MAL
+#  define ERR_MAL "Malloc error"
+# endif
+
 # ifndef ERR_READMAP
 #  define ERR_READMAP "Error while reading .cub map."
 # endif
 
+# ifndef ERR_MCUB
+#  define ERR_MCUB "map not a .cub"
+# endif
+
 # ifndef ERR_EMPTYMAP
 #  define ERR_EMPTYMAP "The map is empty."
+# endif
+
+# ifndef E_MNOTCLOSE
+#  define E_MNOTCLOSE "Map not closed"
 # endif
 
 # ifndef ERR_MAPATEND
@@ -34,12 +55,41 @@
  le fichier, le reste des éléments peut être dans n’importe quel ordre."
 # endif
 
+# ifndef ERR_TEXT
+#  define ERR_TEXT "Texture error"
+# endif
+
+# ifndef ERR_TEXTDUP
+#  define ERR_TEXTDUP "You can't load two images for the same asset"
+# endif
+
+# ifndef ERR_ARGS
+#  define ERR_ARGS "Cub3D need only one argument (.cub map)."
+# endif
+
 # ifndef ERR_TCOLOR
 #  define ERR_TCOLOR "Texture Color must be specified as 'ID R,G,B' with a range\
     [0,255]"
 # endif
+
+# ifndef ERR_MAPEMPT
+#  define ERR_MAPEMPT "Empty line in map"
+# endif
+
+# ifndef ERR_MAPN
+#  define ERR_MAPN "Empty line at the end of the map"
+# endif
+
 # ifndef ERR_TPATH
 #  define ERR_TPATH "Texture Path must be specified as 'ID path'"
+# endif
+
+# ifndef ERR_OPEN
+#  define ERR_OPEN "Can't open the map"
+# endif
+
+# ifndef ERR_MAP
+#  define ERR_MAP "Map Error"
 # endif
 
 # ifndef WIDTH

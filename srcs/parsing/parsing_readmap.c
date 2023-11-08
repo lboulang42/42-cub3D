@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:24:12 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 13:43:25 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:03:47 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	read_map(t_data *data)
 	check_map_buffer(data->map_buffer);
 	data->map = ft_split(data->map_buffer, '\n');
 	if (!data->map || !*data->map)
-		error_exit("Error Splitting Map Buffer");
+		error_exit(ERR_MAL);
 }

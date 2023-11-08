@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:23:46 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 13:26:10 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:03:26 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	check_end_buffer(char *map, int i)
 	while (map[i] && is_white_space(map[i]))
 		i++;
 	if (!map[i])
-		error_exit("moha fumier");
+		error_exit(ERR_MAP);
 	while (map[i])
 	{
 		if (map[i] == '\n' && map[i + 1] == '\n')
-			error_exit("empty line in map");
+			error_exit(ERR_MAPEMPT);
 		i++;
 	}
 	if (map[i] == '\n')
-		error_exit("Map Last char is a \\n");
+		error_exit(ERR_MAPN);
 }
 
 int	is_asset_name(char c1, char c2)
