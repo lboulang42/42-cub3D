@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_assets.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:27:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 16:00:11 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:47:09 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	test_asset_path(char **path, char **stock_ptr)
 
 	if (tab_len(path) != 2)
 	{
-		ft_print_tab(path);
-		printf("%d\n", tab_len(path));
 		return (freetab((void **)path), error_exit(ERR_TPATH));
 	}
 	fd = open(path[1], O_RDONLY);

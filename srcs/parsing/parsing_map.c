@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:29:03 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 14:59:32 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:48:00 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,9 @@ void	check_game_map(char **map, t_data *data)
 	check_charset(map);
 	get_start_coord(map, &start_i, &start_j);
 	start_pos = map[start_i][start_j];
-	map[start_i][start_j] = '0';
+	data->map[start_i][start_j] = '0';
 	do_pathfindmap(map, data);
 	reverse_pathfind();
-	data->pathfindmap[start_i][start_j] = start_pos;
 	while (data->pathfindmap[++i])
 	{
 		j = -1;
@@ -102,6 +101,7 @@ void	check_game_map(char **map, t_data *data)
 			if (data->pathfindmap[i][j] == '?')
 				data->pathfindmap[i][j] = ' ';
 	}
+	data->pathfindmap[start_i +1][start_j +1] = start_pos;
 	free_tab(data->game_map);
 	data->game_map = data->pathfindmap;
 }
