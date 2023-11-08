@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 14:49:57 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:56:19 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	init_sight_direction(t_data *data)
 	}
 	else if (data->player_letter == 'W')
 	{
-		data->dirx = -1;
+		data->dirx = 1;
 		data->diry = 0;
 	}
 	else if (data->player_letter == 'E')
 	{
-		data->dirx = 1;
+		data->dirx = -1;
 		data->diry = 0;
 	}
 }

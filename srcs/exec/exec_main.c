@@ -6,7 +6,7 @@
 /*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 16:46:50 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:53:46 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	calc(t_data *data)
 			texx = tex_largeur - texx - 1;
 		if (data->side == 1 && data->raydiry < 0)
 			texx = tex_largeur - texx - 1;
-		boucle_a(data, x, texture_number, texx);
+		get_textures(data, x, texture_number, texx);
 		ceiling_or_floor(data, x, 0);
 		ceiling_or_floor(data, x, 1);
 		x++;

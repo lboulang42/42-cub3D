@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 15:28:04 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:54:14 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void		define_wallx(t_data *data, double *wallx, int *texture_number,
 /*exec_do_calc.c*/
 int			fill_colors_array(char **str, char **str1, t_data *data);
 void		ceiling_or_floor(t_data *data, int x, int q);
-void		boucle_a(t_data *data, int x, int texNum, int texX);
+void		get_textures(t_data *data, int x, int texNum, int texX);
 
 /*exec_free.c*/
 int			free_all_cub(t_data *data);

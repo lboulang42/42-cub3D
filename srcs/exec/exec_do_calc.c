@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_do_calc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:48:49 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 14:12:10 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:54:11 by gcozigon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ceiling_or_floor(t_data *data, int x, int q)
 	}
 }
 
-void	boucle_a(t_data *data, int x, int texNum, int texX)
+void	get_textures(t_data *data, int x, int texNum, int texX)
 {
 	double	step;
 	double	texpos;
