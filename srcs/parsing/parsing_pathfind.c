@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:33:13 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 15:28:06 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:01:01 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	pthfnd(char **map, int i, int j)
 	lim_j = ft_strlen(map[0]) - 1;
 	lim_i = tab_len(map) - 1;
 	if (map[i][j] == '0')
-        return (freetab((void **)map), error_exit(E_MNOTCLOSE));
+		return (freetab((void **)map), error_exit(E_MNOTCLOSE));
 	map[i][j] = '?';
 	if (j < lim_j && map[i][j + 1] != '1' && map[i][j + 1] != '?')
 		pthfnd(map, i, j + 1);

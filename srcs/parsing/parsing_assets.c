@@ -6,11 +6,38 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:27:54 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 15:06:49 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:00:11 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	test_asset_color2(char **path, char **colors, char **stock_ptr)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < 3)
+	{
+		j = -1;
+		while (colors[i][++j])
+		{
+			if (!ft_isdigit(colors[i][j]))
+			{
+				freetab((void **)colors);
+				return (freetab((void **)path), error_exit(ERR_TCOLOR));
+			}
+		}
+		if (ft_atoi(colors[i]) < 0 || ft_atoi(colors[i]) > 255)
+		{
+			freetab((void **)colors);
+			return (freetab((void **)path), error_exit(ERR_TCOLOR));
+		}
+	}
+	*stock_ptr = ft_strdup(path[1]);
+	freetab((void **)colors);
+}
 
 /*
 Check texture color informations :
@@ -22,28 +49,16 @@ throw error if one of theses rules is not respected; if ok color is saved.
 void	test_asset_color(char **path, char **stock_ptr)
 {
 	char	**colors;
-	int		i;
-	int		j;
 
-	i = -1;
-	if (tab_len(path) != 2)/*handle tablen == 0*/
+	if (tab_len(path) != 2)
 		return (freetab((void **)path), error_exit(ERR_TCOLOR));
 	colors = ft_split(path[1], ',');
 	if (!colors)
 		return (freetab((void **)path), error_exit(ERR_MAL));
 	if (tab_len(colors) != 3)
-		return (freetab((void **)colors), freetab((void **)path), error_exit(ERR_TCOLOR));
-	while (++i < 3)
-	{
-		j = -1;
-		while (colors[i][++j])
-			if (!ft_isdigit(colors[i][j]))
-				return (freetab((void **)colors), freetab((void **)path), error_exit(ERR_TCOLOR));
-		if (ft_atoi(colors[i]) < 0 || ft_atoi(colors[i]) > 255)
-			return (freetab((void **)colors), freetab((void **)path), error_exit(ERR_TCOLOR));
-	}
-	*stock_ptr = ft_strdup(path[1]);
-	freetab((void **)colors);
+		return (freetab((void **)colors), freetab((void **)path),
+			error_exit(ERR_TCOLOR));
+	test_asset_color2(path, colors, stock_ptr);
 }
 
 /*
@@ -58,17 +73,17 @@ void	test_asset_path(char **path, char **stock_ptr)
 	int	fd;
 
 	if (tab_len(path) != 2)
-    {
-        ft_print_tab(path);
-        printf("%d\n", tab_len(path));
+	{
+		ft_print_tab(path);
+		printf("%d\n", tab_len(path));
 		return (freetab((void **)path), error_exit(ERR_TPATH));
-    }
+	}
 	fd = open(path[1], O_RDONLY);
 	if (fd == -1)
 		return (freetab((void **)path), error_exit(ERR_TEXT));
 	close(fd);
 	if (*stock_ptr)
-        return (freetab((void **)path), error_exit(ERR_TEXTDUP));
+		return (freetab((void **)path), error_exit(ERR_TEXTDUP));
 	*stock_ptr = ft_strdup(path[1]);
 }
 
@@ -107,28 +122,4 @@ int	is_asset_to_load(char *str)
 	if (starts_with(str, "C "))
 		return (test_asset(str, &data->ceiling_texture_path, 0), 1);
 	return (0);
-}
-
-/*
-check each row of the map to get the start if the map and check if no info
-is 
-*/
-int	detect_start_map(char **map)
-{
-	int	i;
-	int	index_start_map;
-
-	i = -1;
-	index_start_map = -1;
-	while (map[++i])
-	{
-		if (!is_asset_to_load(map[i]))
-		{
-			if (index_start_map == -1)
-				index_start_map = i;
-		}
-		else if (index_start_map != -1)
-			error_exit(ERR_MAPATEND);
-	}
-	return (index_start_map);
 }

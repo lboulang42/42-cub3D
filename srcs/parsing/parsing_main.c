@@ -6,11 +6,35 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:12:56 by lboulang          #+#    #+#             */
-/*   Updated: 2023/11/08 15:21:32 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:55:57 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+check each row of the map to get the start if the map and check if no info
+is 
+*/
+int	detect_start_map(char **map)
+{
+	int	i;
+	int	index_start_map;
+
+	i = -1;
+	index_start_map = -1;
+	while (map[++i])
+	{
+		if (!is_asset_to_load(map[i]))
+		{
+			if (index_start_map == -1)
+				index_start_map = i;
+		}
+		else if (index_start_map != -1)
+			error_exit(ERR_MAPATEND);
+	}
+	return (index_start_map);
+}
 
 void	parse_init(t_data *data)
 {
