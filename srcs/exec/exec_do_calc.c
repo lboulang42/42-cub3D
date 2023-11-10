@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_do_calc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:48:49 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 16:54:11 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:17:31 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ void	get_textures(t_data *data, int x, int texNum, int texX)
 	int		y;
 
 	y = data->drawstart;
-	step = 1.0 * 64 / data->lineheight;
+	step = 1.0 * IMGSIZE / data->lineheight;
 	texpos = (data->drawstart - HEIGHT / 2 + data->lineheight / 2) * step;
 	while (y < data->drawend)
 	{
-		texy = (int)texpos & (64 - 1);
+		texy = (int)texpos & (IMGSIZE - 1);
 		texpos += step;
-		color = data->texture[texNum][64 * texy + texX];
+		color = data->texture[texNum][IMGSIZE * texy + texX];
 		data->bufmap[y][x] = color;
 		y++;
 	}

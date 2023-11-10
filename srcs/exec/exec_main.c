@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 01:56:10 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 16:53:46 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:17:36 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	calc(t_data *data)
 	int		texx;
 	int		tex_largeur;
 
-	tex_largeur = 64;
+	tex_largeur = IMGSIZE;
 	x = 0;
 	initializebuff(data);
 	while (x < WIDTH -1)

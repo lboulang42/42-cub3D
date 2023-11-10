@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:20:59 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 16:56:19 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:29:36 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	init_all_settings(t_data *data)
 {
 	data->planex = 0.66 * data->diry;
 	data->planey = 0.66 * (data->dirx * -1);
-	data->movespeed = 0.01;
-	data->rotspeed = 0.01;
+	data->movespeed = 0.03;
+	data->rotspeed = 0.02;
 	fill_colors_array(ft_split(data->floor_texture_path, ','),
 		ft_split(data->ceiling_texture_path, ','), data);
 }
@@ -74,7 +74,7 @@ void	init_texture(t_data *data)
 	data->texture = (int **)malloc(sizeof(int *) * 4);
 	while (++i < 4)
 	{
-		data->texture[i] = malloc(sizeof(int) * (64 * 64));
+		data->texture[i] = malloc(sizeof(int) * (IMGSIZE * IMGSIZE));
 		if (!data->texture[i])
 			return (free_texture(data));
 	}

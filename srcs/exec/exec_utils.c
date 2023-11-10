@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:25:27 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 14:09:54 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:17:45 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	create_image(t_data *data, int *texture, char *path)
 	y = -1;
 	data->image = mlx_xpm_file_to_image(data->mlx_ptr, path, &data->img_width,
 			&data->img_height);
-	if (!data->image || data->img_width != 64 || data->img_height != 64)
+	if (!data->image || data->img_width != IMGSIZE || data->img_height != IMGSIZE)
 		free_exit(data);
 	data->addr = (int *)mlx_get_data_addr(data->image, &data->bits_per_pixel,
 			&data->size_line, &data->endian);
