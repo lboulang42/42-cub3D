@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcozigon <gcozigon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:44:08 by gcozigon          #+#    #+#             */
-/*   Updated: 2023/11/08 16:54:14 by gcozigon         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:17:05 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@
 # ifndef HEIGHT
 #  define HEIGHT 680
 # endif
+#define IMGSIZE 128
 
 typedef struct s_key
 {
